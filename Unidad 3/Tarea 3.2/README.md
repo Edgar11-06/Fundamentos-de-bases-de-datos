@@ -85,3 +85,7 @@ El archivo define 17 PK y 16 FK, además de CHECK, UNIQUE y NOT NULL. Usa ON DEL
 ## Estado de evidencias
 
 Las tres capturas previas de ejecución, inserciones y tablas se incluyen en `evidencias/`, junto con `04_diagrama_generado_en_SSMS.png`. El reporte actualizado las organiza en sus secciones correspondientes. Los archivos `.drawio`, `.mmd` y `.dot` son **representaciones editables alternativas**, no exportaciones nativas de SSMS. La captura PNG es la evidencia original; PDF y SVG son conversiones de esa captura, no diagramas editables nativos.
+
+## 🎥 Video explicativo
+
+▶️ Explicación de los temas en YouTube: [PEGA AQUÍ EL ENLACE DE TU VIDEO](https://www.youtube.com/)
