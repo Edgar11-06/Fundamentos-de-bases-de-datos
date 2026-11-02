@@ -9,6 +9,21 @@
 
 > **Competencia específica:** Aplica el proceso de normalización al diseño de los esquemas de bases de datos para detectar anomalías y garantizar la integridad de la información.
 
+## 📂 Estructura
+
+```text
+Tarea 4.1/
+├── README.md
+├── documentacion/
+│   └── Tarea_4.1_Reporte_Tecnico.pdf
+└── diagramas/
+    ├── mapa_conceptual_normalizacion.mmd
+    ├── mapa_conceptual_normalizacion.svg
+    ├── mapa_conceptual_normalizacion.pdf
+    ├── mapa_conceptual_normalizacion.png
+    └── mapa_conceptual_normalizacion.dot
+```
+
 ## 📑 Entregables
 
 - 📄 [Reporte técnico en PDF](documentacion/Tarea_4.1_Reporte_Tecnico.pdf)
@@ -28,19 +43,10 @@ Concepto de normalización; dependencias funcionales completas y parciales; depe
 
 El archivo `.mmd` es editable en Mermaid. El SVG y el PDF son vectoriales y permiten ampliar el mapa sin pérdida de calidad. La composición vectorial se generó con Graphviz a partir de la misma estructura conceptual expresada en Mermaid.
 
-## 📂 Estructura
 
-```text
-Tarea 4.1/
-├── README.md
-├── documentacion/
-│   └── Tarea_4.1_Reporte_Tecnico.pdf
-└── diagramas/
-    ├── mapa_conceptual_normalizacion.mmd
-    ├── mapa_conceptual_normalizacion.svg
-    ├── mapa_conceptual_normalizacion.pdf
-    ├── mapa_conceptual_normalizacion.png
-    └── mapa_conceptual_normalizacion.dot
-```
+
+## 🎥 Video explicativo
+
+▶️ Explicación de los temas en YouTube: [PEGA AQUÍ EL ENLACE DE TU VIDEO](https://www.youtube.com/)
 
 ⬅️ [Volver a Unidad 4](../README.md)
