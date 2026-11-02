@@ -58,7 +58,7 @@ Tarea_3.1_Modelo_Relacional/
 ## Documentación y archivos
 
 - 📄 [Reporte técnico en PDF](documentacion/Tarea_3.1_Reporte_Tecnico.pdf) – investigación, reglas de transformación, esquema tabular, integridad y diagrama integrado en el apartado del esquema relacional.
-- 🧩 [Esquema relacional en SQL](documentacion/esquema_relacional.sql) – propuesta de creación de tablas, PK, FK, restricciones `CHECK` y `UNIQUE` para PostgreSQL.
+- 🧩 [Esquema relacional en SQL](documentacion/esquema_relacional_SQLServer.sql) – propuesta de creación de tablas, PK, FK, restricciones `CHECK` y `UNIQUE` para PostgreSQL.
 - 🖼️ [Diagrama en PNG](diagramas/esquema_relacional.png) – imagen para consulta rápida.
 - 🔎 [Diagrama en SVG](diagramas/esquema_relacional.svg) – versión vectorial que puede ampliarse sin perder nitidez.
 - 📐 [Diagrama en PDF](diagramas/esquema_relacional.pdf) – exportación del diagrama.
