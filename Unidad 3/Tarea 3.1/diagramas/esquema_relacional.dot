@@ -1,0 +1,47 @@
+
+digraph Biblioteca {
+ graph [rankdir=LR, splines=ortho, nodesep=0.35, ranksep=0.75, bgcolor="white", pad=0.25, fontname="Arial", label="Esquema relacional – Sistema de gestión de biblioteca", labelloc=t, fontsize=20];
+ node [shape=plain, fontname="Arial", fontsize=9];
+ edge [color="#586579", arrowsize=0.65, penwidth=1.1, fontname="Arial", fontsize=8];
+
+ CATEGORIA [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dbeafe"><B>CATEGORIA</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK</U> id_categoria</TD></TR><TR><TD ALIGN="LEFT">nombre</TD></TR><TR><TD ALIGN="LEFT">descripcion</TD></TR></TABLE>>];
+ RECURSO [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dbeafe"><B>RECURSO</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK</U> id_recurso</TD></TR><TR><TD ALIGN="LEFT">titulo, anio_publicacion</TD></TR><TR><TD ALIGN="LEFT">editorial, idioma</TD></TR><TR><TD ALIGN="LEFT"><U>FK</U> id_categoria</TD></TR></TABLE>>];
+ EJEMPLAR [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dbeafe"><B>EJEMPLAR</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK/FK</U> id_recurso</TD></TR><TR><TD ALIGN="LEFT"><U>PK</U> num_ejemplar</TD></TR><TR><TD ALIGN="LEFT">estado, ubicacion</TD></TR><TR><TD ALIGN="LEFT">fecha_adquisicion</TD></TR></TABLE>>];
+ AUTOR [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dbeafe"><B>AUTOR</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK</U> id_autor</TD></TR><TR><TD ALIGN="LEFT">nombre, nacionalidad</TD></TR></TABLE>>];
+ AUTORIA [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fef3c7"><B>AUTORIA</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK/FK</U> id_recurso</TD></TR><TR><TD ALIGN="LEFT"><U>PK/FK</U> id_autor</TD></TR><TR><TD ALIGN="LEFT">orden_autoria</TD></TR></TABLE>>];
+ USUARIO [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dbeafe"><B>USUARIO</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK</U> id_usuario</TD></TR><TR><TD ALIGN="LEFT">nombre_pila, apellidos</TD></TR><TR><TD ALIGN="LEFT">correo, fecha_registro</TD></TR><TR><TD ALIGN="LEFT">estatus</TD></TR></TABLE>>];
+ TELEFONO [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fef3c7"><B>TELEFONO_USUARIO</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK/FK</U> id_usuario</TD></TR><TR><TD ALIGN="LEFT"><U>PK</U> telefono</TD></TR></TABLE>>];
+ PRESTAMO [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dcfce7"><B>PRESTAMO</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK</U> folio</TD></TR><TR><TD ALIGN="LEFT"><U>FK</U> id_usuario</TD></TR><TR><TD ALIGN="LEFT"><U>FK</U> id_recurso, num_ejemplar</TD></TR><TR><TD ALIGN="LEFT"><U>FK</U> id_empleado</TD></TR><TR><TD ALIGN="LEFT">fechas del préstamo</TD></TR></TABLE>>];
+ BIBLIOTECARIO [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dbeafe"><B>BIBLIOTECARIO</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK</U> id_empleado</TD></TR><TR><TD ALIGN="LEFT">nombre, turno</TD></TR></TABLE>>];
+ MULTA [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#dbeafe"><B>MULTA</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK</U> id_multa</TD></TR><TR><TD ALIGN="LEFT"><U>FK</U> folio</TD></TR><TR><TD ALIGN="LEFT">tipo, monto</TD></TR><TR><TD ALIGN="LEFT">fecha_generacion, estatus_pago</TD></TR></TABLE>>];
+
+ ESTUDIANTE [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e0e7ff"><B>ESTUDIANTE</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK/FK</U> id_usuario</TD></TR><TR><TD ALIGN="LEFT">matricula, carrera, semestre</TD></TR></TABLE>>];
+ DOCENTE [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e0e7ff"><B>DOCENTE</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK/FK</U> id_usuario</TD></TR><TR><TD ALIGN="LEFT">num_empleado, departamento</TD></TR></TABLE>>];
+ EXTERNO [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e0e7ff"><B>EXTERNO</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK/FK</U> id_usuario</TD></TR><TR><TD ALIGN="LEFT">institucion_origen, identificacion</TD></TR></TABLE>>];
+ LIBRO [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e0e7ff"><B>LIBRO</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK/FK</U> id_recurso</TD></TR><TR><TD ALIGN="LEFT">isbn, edicion</TD></TR></TABLE>>];
+ REVISTA [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e0e7ff"><B>REVISTA</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK/FK</U> id_recurso</TD></TR><TR><TD ALIGN="LEFT">issn, volumen, numero</TD></TR></TABLE>>];
+ TESIS [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#e0e7ff"><B>TESIS</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK/FK</U> id_recurso</TD></TR><TR><TD ALIGN="LEFT">asesor, grado_academico</TD></TR></TABLE>>];
+ PALABRAS [label=<<TABLE BORDER="1" CELLBORDER="0" CELLSPACING="0" CELLPADDING="5"><TR><TD BGCOLOR="#fef3c7"><B>PALABRA_CLAVE_RECURSO</B></TD></TR><TR><TD ALIGN="LEFT"><U>PK/FK</U> id_recurso</TD></TR><TR><TD ALIGN="LEFT"><U>PK</U> palabra_clave</TD></TR></TABLE>>];
+
+ CLAVES [shape=note, style="filled", fillcolor="#f8fafc", color="#94a3b8", label="Jerarquías (tablas PK/FK):\nUSUARIO → ESTUDIANTE, DOCENTE, EXTERNO\nRECURSO → LIBRO, REVISTA, TESIS\n\nMultivalorados:\nTELEFONO_USUARIO y PALABRA_CLAVE_RECURSO\n\nDerivados no almacenados:\nadeudo_total y dias_retraso"];
+
+ CATEGORIA -> RECURSO [label="1:N"];
+ RECURSO -> EJEMPLAR [label="1:N"];
+ RECURSO -> AUTORIA [label="1:N"];
+ AUTOR -> AUTORIA [label="1:N"];
+ USUARIO -> TELEFONO [label="1:N"];
+ USUARIO -> PRESTAMO [label="1:N"];
+ EJEMPLAR -> PRESTAMO [label="1:N"];
+ BIBLIOTECARIO -> PRESTAMO [label="1:N"];
+ PRESTAMO -> MULTA [label="1:N"];
+
+ USUARIO -> ESTUDIANTE [label="PK/FK"];
+ USUARIO -> DOCENTE [label="PK/FK"];
+ USUARIO -> EXTERNO [label="PK/FK"];
+ RECURSO -> LIBRO [label="PK/FK"];
+ RECURSO -> REVISTA [label="PK/FK"];
+ RECURSO -> TESIS [label="PK/FK"];
+ RECURSO -> PALABRAS [label="1:N"];
+
+ RECURSO -> CLAVES [style=dashed, arrowhead=none];
+}

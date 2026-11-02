@@ -1,0 +1,121 @@
+erDiagram
+    CATEGORIA ||--o{ RECURSO : agrupa
+    RECURSO ||--|{ EJEMPLAR : tiene
+    RECURSO ||--|{ AUTORIA : registra
+    AUTOR ||--|{ AUTORIA : escribe
+    USUARIO ||--|{ TELEFONO_USUARIO : registra
+    RECURSO ||--o{ PALABRA_CLAVE_RECURSO : contiene
+    USUARIO ||--o{ PRESTAMO : solicita
+    EJEMPLAR ||--o{ PRESTAMO : aparece_en
+    BIBLIOTECARIO ||--o{ PRESTAMO : autoriza
+    PRESTAMO ||--o{ MULTA : genera
+
+    USUARIO ||--o| ESTUDIANTE : "subtipo (PK/FK)"
+    USUARIO ||--o| DOCENTE : "subtipo (PK/FK)"
+    USUARIO ||--o| EXTERNO : "subtipo (PK/FK)"
+    RECURSO ||--o| LIBRO : "subtipo (PK/FK)"
+    RECURSO ||--o| REVISTA : "subtipo (PK/FK)"
+    RECURSO ||--o| TESIS : "subtipo (PK/FK)"
+
+    CATEGORIA {
+        varchar id_categoria PK
+        varchar nombre
+        text descripcion
+    }
+    USUARIO {
+        varchar id_usuario PK
+        varchar nombre_pila
+        varchar apellido_paterno
+        varchar apellido_materno
+        varchar correo
+        date fecha_registro
+        varchar estatus
+    }
+    ESTUDIANTE {
+        varchar id_usuario PK, FK
+        varchar matricula UK
+        varchar carrera
+        smallint semestre
+    }
+    DOCENTE {
+        varchar id_usuario PK, FK
+        varchar num_empleado UK
+        varchar departamento
+    }
+    EXTERNO {
+        varchar id_usuario PK, FK
+        varchar institucion_origen
+        varchar identificacion
+    }
+    TELEFONO_USUARIO {
+        varchar id_usuario PK, FK
+        varchar telefono PK
+    }
+    RECURSO {
+        varchar id_recurso PK
+        varchar titulo
+        smallint anio_publicacion
+        varchar editorial
+        varchar idioma
+        varchar id_categoria FK
+    }
+    LIBRO {
+        varchar id_recurso PK, FK
+        varchar isbn UK
+        varchar edicion
+    }
+    REVISTA {
+        varchar id_recurso PK, FK
+        varchar issn
+        varchar volumen
+        varchar numero
+    }
+    TESIS {
+        varchar id_recurso PK, FK
+        varchar asesor
+        varchar grado_academico
+    }
+    PALABRA_CLAVE_RECURSO {
+        varchar id_recurso PK, FK
+        varchar palabra_clave PK
+    }
+    EJEMPLAR {
+        varchar id_recurso PK, FK
+        int num_ejemplar PK
+        varchar estado
+        varchar ubicacion
+        date fecha_adquisicion
+    }
+    AUTOR {
+        varchar id_autor PK
+        varchar nombre
+        varchar nacionalidad
+    }
+    AUTORIA {
+        varchar id_recurso PK, FK
+        varchar id_autor PK, FK
+        smallint orden_autoria
+    }
+    BIBLIOTECARIO {
+        varchar id_empleado PK
+        varchar nombre
+        varchar turno
+    }
+    PRESTAMO {
+        varchar folio PK
+        varchar id_usuario FK
+        varchar id_recurso FK
+        int num_ejemplar FK
+        varchar id_empleado FK
+        date fecha_prestamo
+        date fecha_limite
+        date fecha_devolucion
+    }
+    MULTA {
+        varchar id_multa PK
+        varchar folio FK
+        varchar tipo
+        decimal monto
+        date fecha_generacion
+        varchar estatus_pago
+    }
