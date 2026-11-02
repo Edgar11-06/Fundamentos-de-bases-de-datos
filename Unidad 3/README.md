@@ -11,7 +11,7 @@
 
 ## 📑 Actividades de la Unidad 3
 
-1. 📁 **[Tarea 3.1: Transformación de Modelo E-R a Esquema Relacional y Reglas de Integridad](Unidad 3/Tarea 3.1)**
+1. 📁 **[Tarea 3.1: Transformación de Modelo E-R a Esquema Relacional y Reglas de Integridad](/Tarea 3.1)**
    - 📄 **Entregable PDF:** [Tarea 3.1 — Reporte técnico](documentacion/Tarea_3.1_Reporte_Tecnico.pdf)
    - 🗄️ **Archivo SQL:** [esquema_relacional_SQLServer.sql](Tarea_3.1/esquema_relacional_SQLServer.sql)
    - 🎥 **Video en YouTube:** Pendiente de agregar el enlace de explicación de la Tarea 3.1
