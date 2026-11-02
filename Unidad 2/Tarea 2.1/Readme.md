@@ -36,7 +36,6 @@ Unidad2/
 └── Tarea 2.1/
     ├── Readme.md
     ├── documentacion/
-    │   ├── Tarea_2.1_Modelado_ER.docx
     │   └── Tarea_2.1_Modelado_ER.pdf
     └── diagramas/
         ├── modelo_er_biblioteca_itsm.drawio   (fuente editable)
