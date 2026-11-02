@@ -1,0 +1,38 @@
+digraph Normalizacion {
+ graph [rankdir=TB, bgcolor="white", pad=".25", nodesep=".34", ranksep=".40", fontname="DejaVu Sans", splines=polyline, compound=true];
+ node [shape=box, style="rounded,filled", color="#9db5cc", fillcolor="#f4f8fd", fontname="DejaVu Sans", fontsize=10, margin=".18,.13"];
+ edge [color="#718da9", arrowsize=.55, penwidth=1.2];
+ N [label="NORMALIZACIÓN DE BASES DE DATOS\nOrganizar relaciones y reducir redundancia y anomalías\nDescomposición sin pérdida de información", fillcolor="#17365d",fontcolor=white,fontsize=16,penwidth=0];
+ subgraph cluster_conceptos {
+ label="1 · FUNDAMENTOS"; labelloc=t; style="rounded,filled";color="#c6d9ec";fillcolor="#f5f9fd";fontsize=13;
+ C [label="DEPENDENCIA FUNCIONAL\nX → Y: mismo X implica mismo Y",fillcolor="#dceafa"];
+ CO [label="COMPLETA\nY depende de todo X,\nno de una parte propia"];
+ PA [label="PARCIAL\nParte de clave compuesta → atributo no primo\nEj.: id_estudiante → nombre"];
+ TR [label="TRANSITIVA\nid_empleado → id_depto → nombre_depto"];
+ DM [label="MULTIVALUADA (X ↠ Y)\nConjuntos independientes:\nidiomas y aficiones"];
+ DJ [label="DE REUNIÓN (JOIN)\nReconstruir una relación\nmediante sus proyecciones"];
+ C -> CO -> PA -> TR -> DM -> DJ [style=dashed];
+ }
+ subgraph cluster_formas {
+ label="2 · FORMAS NORMALES (criterios progresivos)"; labelloc=t;style="rounded,filled";color="#b9d6c3";fillcolor="#f3faf5";fontsize=13;
+ F1 [label="1FN · PRIMERA\nValores atómicos y sin grupos repetidos\nEj.: separar teléfonos en otra tabla",fillcolor="#dff1e5"];
+ F2 [label="2FN · SEGUNDA\n1FN + ningún atributo no primo depende\nde parte de una clave candidata compuesta\nEj.: separar datos del estudiante"];
+ F3 [label="3FN · TERCERA\nEn cada X → A no trivial:\nX superclave O A atributo primo\nEj.: separar DEPARTAMENTO"];
+ FB [label="FNBC · BOYCE-CODD\nEn cada DF no trivial, X es superclave\nMás estricta que 3FN"];
+ F4 [label="4FN · CUARTA\nFNBC + toda dependencia multivaluada\nno trivial tiene determinante superclave\nEj.: separar idiomas y aficiones"];
+ F5 [label="5FN · QUINTA\nToda dependencia de reunión no trivial\nestá implicada por claves candidatas\nEj.: proveedor–pieza–proyecto"];
+ F1 -> F2 -> F3 -> FB -> F4 -> F5;
+ }
+ subgraph cluster_anomalias {
+ label="3 · PROBLEMAS Y EJEMPLOS"; labelloc=t;style="rounded,filled";color="#e8cdb1";fillcolor="#fffaf5";fontsize=13;
+ A [label="ANOMALÍAS POR REDUNDANCIA",fillcolor="#fce8d3"];
+ I [label="INSERCIÓN\nNo registrar un departamento\nsin tener empleado"];
+ B [label="BORRADO\nEliminar último empleado\nborra información del departamento"];
+ M [label="MODIFICACIÓN\nCambiar un dato repetido\nen múltiples filas"];
+ E [label="BIBLIOTECA · APLICACIÓN\nUSUARIO + TELEFONO_USUARIO\nRECURSO + PALABRA_CLAVE_RECURSO\nAUTORIA para relación N:M"];
+ V [label="VALIDAR CADA DESCOMPOSICIÓN\nJOIN sin pérdida; preservar dependencias\ncuando sea posible",fillcolor="#fff0d9"];
+ A -> I -> B -> M -> E -> V [style=dashed];
+ }
+ N -> C [lhead=cluster_conceptos]; N -> F1 [lhead=cluster_formas]; N -> A [lhead=cluster_anomalias];
+ {rank=same; C;F1;A}
+}
