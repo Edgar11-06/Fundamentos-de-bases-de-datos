@@ -240,14 +240,7 @@ classDiagram
 
 > La comparativa completa, el análisis de coincidencias y diferencias y el ejemplo de traducción a código están en el [documento PDF](documentacion/Tarea_2.2_ER_a_UML.pdf).
 
-## Cómo regenerar los diagramas
 
-```bash
-npm install -g @mermaid-js/mermaid-cli
-mmdc -i diagramas/diagrama_clases_uml_biblioteca.mmd -o diagramas/diagrama_clases_uml_biblioteca.svg
-```
-
-También puedes editar el `.mmd` en línea en [mermaid.live](https://mermaid.live/).
 
 ## Referencias (APA 7)
 
