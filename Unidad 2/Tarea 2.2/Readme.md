@@ -32,7 +32,6 @@ Unidad2/
 └── Tarea 2.2/
     ├── Readme.md
     ├── documentacion/
-    │   ├── Tarea_2.2_ER_a_UML.docx
     │   └── Tarea_2.2_ER_a_UML.pdf
     └── diagramas/
         ├── diagrama_clases_uml_biblioteca.mmd   (fuente editable)
