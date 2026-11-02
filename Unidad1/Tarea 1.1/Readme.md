@@ -1,6 +1,23 @@
 # Tarea 1.1: Fundamentos, objetivos y modelos de bases de datos
 
-Documentación de la tarea sobre fundamentos, objetivos, usos, áreas de aplicación y modelos de bases de datos.
+## Datos del alumno
+
+| | |
+|---|---|
+| **Alumno** | Edgar Alejandro Hernandez Guajardo |
+| **Matrícula** | I24050409 |
+| **Docente** | Ing. Ruben Riojas |
+| **Institución** | Instituto Tecnológico Superior de Monclova |
+| **Unidad** | Unidad 1 |
+| **Actividad** | Tarea 1.1 |
+
+## Descripción de la tarea
+
+En esta tarea se investigan los conceptos fundamentales, los objetivos, los usos y las áreas de aplicación de las bases de datos, y se sintetizan en un mapa conceptual. Además, se estudian los principales modelos de bases de datos (jerárquico, red, relacional, orientado a objetos, objeto-relacional y NoSQL) y se comparan en una tabla que detalla su definición y su forma de representar los datos.
+
+## 📄 Documentación
+
+👉 [**Ver documento PDF de la Tarea 1.1**](documentacion/Tarea_1.1_Bases_de_Datos.pdf)
 
 ## Estructura de la carpeta
 
@@ -16,9 +33,6 @@ Unidad1/
 ```
 
 El archivo `.mmd` es la **fuente vectorial editable** (Mermaid); el `.svg` y el `.png` son sus renders.
-
-**Alumno:** Edgar Alejandro Hernandez Guajardo · **Matrícula:** I24050409
-**Docente:** Ing. Ruben Riojas · **Institución:** Instituto Tecnológico Superior de Monclova
 
 ## 1. Mapa conceptual
 
@@ -63,9 +77,9 @@ flowchart TB
 | **Objeto-relacional** | Híbrido que amplía el modelo relacional con características de objetos. | Tablas con tipos definidos por el usuario, tablas anidadas y herencia; SQL extendido. |
 | **NoSQL** | Familia de modelos no relacionales para gran volumen y variedad de datos, con esquema flexible. | Documentos (JSON/BSON), clave–valor, familias de columnas o grafos. |
 
-> La tabla completa (con ventajas, limitaciones y ejemplos) está en el documento de `documentacion/`.
+> La tabla completa (con ventajas, limitaciones y ejemplos) está en el [documento PDF](documentacion/Tarea_1.1_Bases_de_Datos.pdf).
 
-## Cómo regenerar los diagramas
+## Cómo regenerar el diagrama
 
 ```bash
 npm install -g @mermaid-js/mermaid-cli
@@ -83,6 +97,6 @@ mmdc -i diagramas/01_mapa_conceptual_bases_de_datos.mmd -o diagramas/01_mapa_con
 - Sadalage, P. J., & Fowler, M. (2012). *NoSQL distilled: A brief guide to the emerging world of polyglot persistence*. Addison-Wesley.
 - Silberschatz, A., Korth, H. F., & Sudarshan, S. (2019). *Database system concepts* (7.ª ed.). McGraw-Hill Education.
 
-## Video explicativo
+## 🎥 Video explicativo
 
 ▶️ Explicación de los temas en YouTube: [PEGA AQUÍ EL ENLACE DE TU VIDEO](https://www.youtube.com/)
