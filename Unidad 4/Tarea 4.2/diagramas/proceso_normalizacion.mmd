@@ -1,0 +1,8 @@
+flowchart TB
+  U["SIN NORMALIZAR (0FN)\nFicha de préstamo con lista de autores y teléfonos\nDatos de usuario, categoría y recurso repetidos"]
+  F1["1FN · ATOMICIDAD\nUna fila por (folio, id_autor)\nAutores y teléfonos dejan de ser listas\nTodavía hay datos redundantes"]
+  F2["2FN · SIN DEPENDENCIAS PARCIALES\nSeparar atributos determinados por folio\ny atributos determinados por id_autor\nTablas PRESTAMO_BASE y AUTOR"]
+  F3["3FN · SIN TRANSITIVAS INDEBIDAS\nSeparar USUARIO, RECURSO, CATEGORIA, EJEMPLAR\nMantener AUTORIA para recurso-autor\nPRESTAMO referencia las claves"]
+  B["FNBC (ANÁLISIS)\nPara cada X → Y no trivial:\nX debe ser superclave\nVerificación limitada a las DF declaradas"]
+  R["MODELO RESULTANTE\n17 tablas de la biblioteca en SQL Server\nPK, FK, CHECK, UNIQUE, NOT NULL\nPreserva datos mediante relaciones"]
+  U -->|"Separar grupos repetidos"| F1 -->|"Descomponer por determinantes"| F2 -->|"Eliminar transitivas"| F3 --> B --> R

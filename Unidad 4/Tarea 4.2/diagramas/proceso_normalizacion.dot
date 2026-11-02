@@ -1,0 +1,12 @@
+digraph G {
+ graph [rankdir=LR,bgcolor=white,pad=".4",nodesep=.5,ranksep=.55,fontsize=12];
+ node [shape=box,style="rounded,filled",fillcolor="#eef4fb",color="#7692b1",fontname="DejaVu Sans",fontsize=11,margin=".21,.17"];
+ edge [color="#597b9c",penwidth=1.5,arrowsize=.7,fontname="DejaVu Sans",fontsize=9];
+ U [label="0FN: DATOS SIN NORMALIZAR\nPréstamo con listas de autores/teléfonos\ny nombres de usuario, recurso y categoría repetidos",fillcolor="#fce9df"];
+ F1 [label="1FN · ATOMICIDAD\nFilas individuales, clave (folio, id_autor)\nSin listas ni grupos repetidos"];
+ F2 [label="2FN · DEPENDENCIAS COMPLETAS\nfolio → datos del préstamo\nid_autor → nombre_autor\nSeparar tablas correspondientes"];
+ F3 [label="3FN · SIN TRANSITIVAS\nid_recurso → id_categoria → nombre_categoria\nSeparar RECURSO y CATEGORIA\nTambién USUARIO, EJEMPLAR y AUTORIA"];
+ B [label="FNBC · VERIFICACIÓN\nPara cada X → Y no trivial,\nX debe ser superclave"];
+ R [label="RESULTADO\n17 tablas relacionadas\nPK, FK, CHECK, UNIQUE, NOT NULL",fillcolor="#def3e4"];
+ U -> F1 -> F2 -> F3 -> B -> R;
+}
