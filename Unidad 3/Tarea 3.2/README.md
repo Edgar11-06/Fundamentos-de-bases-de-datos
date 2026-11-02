@@ -104,25 +104,23 @@ Las siguientes capturas fueron proporcionadas desde la instalación de SQL Serve
 
 ### 9.1 Ejecución y resultados de consultas
 
-![Ejecución correcta y resultados de consultas](evidencias/01_evidencia.png)
+![Ejecución correcta y resultados de consultas](diagramas/consultas.png)
 
 Se observan consultas con resultados de conteos y préstamos relacionados con usuarios y recursos.
 
 ### 9.2 Sentencias de inserción
 
-![Sentencias INSERT INTO](evidencias/02_evidencia.png)
+![Sentencias INSERT INTO](diagramas/insercion.png)
 
 Se muestran las instrucciones de inserción de datos de prueba.
 
 ### 9.3 Tablas creadas en la base Biblioteca
 
-![Explorador de objetos con las tablas](evidencias/03_evidencia.png)
+![Explorador de objetos con las tablas](diagramas/tablas.png)
 
 Se observa el listado de tablas del esquema `dbo` en la base `Biblioteca`.
 
-### 9.4 Diagrama generado por el SGBD
 
-![Diagrama de SSMS](evidencias/04_diagrama_generado_en_SSMS.png)
 
 Esta evidencia muestra las relaciones del modelo físico en SSMS.
 
@@ -133,7 +131,7 @@ Tarea_3.2_SQLServer_Entrega_Actualizada/
 ├── README.md
 ├── documentacion/
 │   ├── schema.sql
-│   └── Tarea_3.2_Reporte_Tecnico_SQLServer_Diagrama_Ajustado.pdf
+│   └── Tarea_3.2.pdf
 ├── diagramas/
 │   ├── diagrama_fisico_SQLServer_SSMS.png
 │   ├── diagrama_fisico_SQLServer_SSMS.pdf
@@ -141,12 +139,7 @@ Tarea_3.2_SQLServer_Entrega_Actualizada/
 │   ├── esquema_fisico.mmd
 │   ├── esquema_fisico.drawio
 │   └── esquema_fisico.dot
-└── evidencias/
-    ├── 01_evidencia.png
-    ├── 02_evidencia.png
-    ├── 03_evidencia.png
-    ├── 04_diagrama_generado_en_SSMS.png
-    └── GUIA_EVIDENCIAS_SQLSERVER.md
+
 ```
 
 ## 11. Conclusión
