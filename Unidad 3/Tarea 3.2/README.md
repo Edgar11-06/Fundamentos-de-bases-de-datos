@@ -27,7 +27,7 @@ Generar el esquema físico en Microsoft SQL Server y documentar su implementaci�
 
 | Archivo | Contenido |
 |---|---|
-| [Reporte técnico PDF](documentacion/Tarea_3.2_Reporte_Tecnico_SQLServer_Diagrama_Ajustado.pdf) | Diccionario de datos, reglas, diagrama y procedimiento de validación |
+| [Reporte técnico PDF](documentacion/Tarea_3.2.pdf) | Diccionario de datos, reglas, diagrama y procedimiento de validación |
 | [schema.sql](documentacion/schema.sql) | Creación de las 17 tablas, restricciones, inserciones y consultas de prueba |
 | [Diagrama original de SSMS (PNG)](diagramas/diagrama_fisico_SQLServer_SSMS.png) | Captura del esquema físico generado en SQL Server |
 | [Diagrama en PDF](diagramas/diagrama_fisico_SQLServer_SSMS.pdf) | Versión para consulta e impresión |
