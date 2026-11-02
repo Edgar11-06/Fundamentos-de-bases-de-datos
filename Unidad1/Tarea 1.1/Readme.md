@@ -26,7 +26,6 @@ Unidad1/
 └── Tarea 1.1/
     ├── Readme.md
     ├── documentacion/
-    │   ├── Tarea_1.1_Bases_de_Datos.docx
     │   └── Tarea_1.1_Bases_de_Datos.pdf
     └── diagramas/
         └── 01_mapa_conceptual_bases_de_datos.(mmd|svg|png)
