@@ -150,3 +150,7 @@ El proyecto implementa el esquema físico de la biblioteca en SQL Server mediant
 
 - [Microsoft Learn — CREATE TABLE (Transact-SQL)](https://learn.microsoft.com/es-es/sql/t-sql/statements/create-table-transact-sql)
 - [Microsoft Learn — Restricciones de clave primaria y externa](https://learn.microsoft.com/es-es/sql/relational-databases/tables/primary-and-foreign-key-constraints)
+
+## 🎥 Video explicativo
+
+▶️ Explicación de los temas en YouTube: [PEGA AQUÍ EL ENLACE DE TU VIDEO](https://www.youtube.com/)
