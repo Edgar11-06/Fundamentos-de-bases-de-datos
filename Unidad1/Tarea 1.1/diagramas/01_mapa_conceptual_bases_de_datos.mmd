@@ -1,0 +1,27 @@
+flowchart TB
+    BD(["<b>BASE DE DATOS</b><br/>Colección organizada de datos<br/>relacionados, administrada<br/>por un SGBD"])
+
+    DEF["<b>Conceptos fundamentales</b>"]
+    OBJ["<b>Objetivos</b>"]
+    USO["<b>Usos</b>"]
+    APL["<b>Áreas de aplicación</b>"]
+    MOD["<b>Modelos de datos</b>"]
+
+    BD -- "se define a partir de" --> DEF
+    BD -- "persigue" --> OBJ
+    BD -- "se utiliza para" --> USO
+    BD -- "se aplica en" --> APL
+    BD -- "se estructura mediante" --> MOD
+
+    DEF -- "incluye" --> D["• Dato e información<br/>• SGBD (software de gestión)<br/>• Esquema e instancia<br/>• Entidad, atributo y relación<br/>• Lenguajes DDL, DML, DCL y TCL"]
+    OBJ -- "como" --> O["• Reducir la redundancia<br/>• Garantizar integridad y consistencia<br/>• Independencia de los datos<br/>• Seguridad y control de acceso<br/>• Concurrencia y recuperación"]
+    USO -- "como" --> U["• Almacenar y organizar datos<br/>• Consultar y recuperar información<br/>• Procesar transacciones<br/>• Apoyar la toma de decisiones"]
+    APL -- "por ejemplo" --> A["• Banca y finanzas<br/>• Salud<br/>• Educación<br/>• Comercio electrónico y logística<br/>• Industria y manufactura<br/>• Redes sociales y Big Data"]
+    MOD -- "entre ellos" --> M["• Jerárquico<br/>• Red<br/>• Relacional<br/>• Orientado a objetos<br/>• NoSQL"]
+
+    classDef central fill:#1F3864,stroke:#1F3864,color:#ffffff,stroke-width:2px
+    classDef rama fill:#2E75B6,stroke:#1F3864,color:#ffffff
+    classDef hoja fill:#DEEAF6,stroke:#2E75B6,color:#1F3864,text-align:left
+    class BD central
+    class DEF,OBJ,USO,APL,MOD rama
+    class D,O,U,A,M hoja
