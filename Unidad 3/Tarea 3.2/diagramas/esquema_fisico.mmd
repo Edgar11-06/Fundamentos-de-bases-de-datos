@@ -1,0 +1,119 @@
+erDiagram
+    CATEGORIA {
+        varchar id_categoria
+        varchar nombre
+        varchar descripcion
+    }
+    USUARIO {
+        varchar id_usuario
+        varchar nombre_pila
+        varchar apellido_paterno
+        varchar apellido_materno
+        varchar correo
+        date fecha_registro
+        varchar estatus
+    }
+    ESTUDIANTE {
+        varchar id_usuario
+        varchar matricula
+        varchar carrera
+        smallint semestre
+    }
+    DOCENTE {
+        varchar id_usuario
+        varchar num_empleado
+        varchar departamento
+    }
+    EXTERNO {
+        varchar id_usuario
+        varchar institucion_origen
+        varchar identificacion
+    }
+    TELEFONO_USUARIO {
+        varchar id_usuario
+        varchar telefono
+    }
+    RECURSO {
+        varchar id_recurso
+        varchar titulo
+        smallint anio_publicacion
+        varchar editorial
+        varchar idioma
+        varchar id_categoria
+    }
+    LIBRO {
+        varchar id_recurso
+        varchar isbn
+        varchar edicion
+    }
+    REVISTA {
+        varchar id_recurso
+        varchar issn
+        varchar volumen
+        varchar numero
+    }
+    TESIS {
+        varchar id_recurso
+        varchar asesor
+        varchar grado_academico
+    }
+    PALABRA_CLAVE_RECURSO {
+        varchar id_recurso
+        varchar palabra_clave
+    }
+    AUTOR {
+        varchar id_autor
+        varchar nombre
+        varchar nacionalidad
+    }
+    AUTORIA {
+        varchar id_recurso
+        varchar id_autor
+        smallint orden_autoria
+    }
+    EJEMPLAR {
+        varchar id_recurso
+        int num_ejemplar
+        varchar estado
+        varchar ubicacion
+        date fecha_adquisicion
+    }
+    BIBLIOTECARIO {
+        varchar id_empleado
+        varchar nombre
+        varchar turno
+    }
+    PRESTAMO {
+        varchar folio
+        varchar id_usuario
+        varchar id_recurso
+        int num_ejemplar
+        varchar id_empleado
+        date fecha_prestamo
+        date fecha_limite
+        date fecha_devolucion
+    }
+    MULTA {
+        varchar id_multa
+        varchar folio
+        varchar tipo
+        numeric monto
+        date fecha_generacion
+        varchar estatus_pago
+    }
+    USUARIO ||--o{ ESTUDIANTE : "FK"
+    USUARIO ||--o{ DOCENTE : "FK"
+    USUARIO ||--o{ EXTERNO : "FK"
+    USUARIO ||--o{ TELEFONO_USUARIO : "FK"
+    CATEGORIA ||--o{ RECURSO : "FK"
+    RECURSO ||--o{ LIBRO : "FK"
+    RECURSO ||--o{ REVISTA : "FK"
+    RECURSO ||--o{ TESIS : "FK"
+    RECURSO ||--o{ PALABRA_CLAVE_RECURSO : "FK"
+    RECURSO ||--o{ AUTORIA : "FK"
+    AUTOR ||--o{ AUTORIA : "FK"
+    RECURSO ||--o{ EJEMPLAR : "FK"
+    USUARIO ||--o{ PRESTAMO : "FK"
+    BIBLIOTECARIO ||--o{ PRESTAMO : "FK"
+    EJEMPLAR ||--o{ PRESTAMO : "FK"
+    PRESTAMO ||--o{ MULTA : "FK"
