@@ -1,0 +1,56 @@
+flowchart TB
+    subgraph EXT["NIVEL EXTERNO (vistas de usuario)"]
+        direction LR
+        E1["Vista 1<br/>Control escolar"]
+        E2["Vista 2<br/>Docentes"]
+        E3["Vista n<br/>Finanzas"]
+    end
+
+    MAP1{{"Correspondencia<br/>externo / conceptual<br/><i>(independencia lógica)</i>"}}
+
+    subgraph CON["NIVEL CONCEPTUAL (esquema lógico global)"]
+        direction LR
+        C1["Entidades, atributos<br/>y relaciones"]
+        C2["Restricciones de<br/>integridad y seguridad"]
+    end
+
+    MAP2{{"Correspondencia<br/>conceptual / interno<br/><i>(independencia física)</i>"}}
+
+    subgraph INT["NIVEL INTERNO / FÍSICO (esquema de almacenamiento)"]
+        direction LR
+        I1["Archivos y<br/>estructuras de datos"]
+        I2["Índices y<br/>rutas de acceso"]
+        I3["Bloques, páginas y<br/>compresión"]
+    end
+
+    DISK[("Almacenamiento físico<br/>(discos, SSD, nube)")]
+
+    U1(["Usuarios finales y aplicaciones"])
+    U1 --> E1
+    U1 --> E2
+    U1 --> E3
+    E1 --> MAP1
+    E2 --> MAP1
+    E3 --> MAP1
+    MAP1 --> C1
+    MAP1 --> C2
+    C1 --> MAP2
+    C2 --> MAP2
+    MAP2 --> I1
+    MAP2 --> I2
+    MAP2 --> I3
+    I1 --> DISK
+    I2 --> DISK
+    I3 --> DISK
+
+    classDef nodo fill:#DEEAF6,stroke:#2E75B6,color:#1F3864
+    classDef map fill:#FFF2CC,stroke:#BF9000,color:#7F6000
+    classDef user fill:#1F3864,stroke:#1F3864,color:#ffffff
+    classDef disk fill:#E2EFDA,stroke:#548235,color:#375623
+    class E1,E2,E3,C1,C2,I1,I2,I3 nodo
+    class MAP1,MAP2 map
+    class U1 user
+    class DISK disk
+    style EXT fill:#FFFFFF,stroke:#1F3864,stroke-width:2px
+    style CON fill:#FFFFFF,stroke:#1F3864,stroke-width:2px
+    style INT fill:#FFFFFF,stroke:#1F3864,stroke-width:2px

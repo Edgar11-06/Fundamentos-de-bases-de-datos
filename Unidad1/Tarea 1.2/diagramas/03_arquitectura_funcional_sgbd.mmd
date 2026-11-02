@@ -1,0 +1,72 @@
+flowchart TB
+    subgraph USR["USUARIOS"]
+        direction LR
+        US1["Usuarios<br/>ingenuos"]
+        US2["Programadores<br/>de aplicaciones"]
+        US3["Usuarios<br/>avanzados"]
+        US4["Administrador<br/>(DBA)"]
+    end
+
+    subgraph INTF["INTERFACES"]
+        direction LR
+        IF1["Aplicaciones"]
+        IF2["Precompilador<br/>DML"]
+        IF3["Consultas<br/>interactivas"]
+        IF4["Herramientas<br/>administrativas"]
+    end
+
+    subgraph QP["PROCESADOR DE CONSULTAS"]
+        direction LR
+        Q1["Intérprete DDL"]
+        Q2["Compilador DML<br/>y optimizador"]
+        Q3["Motor de<br/>evaluación"]
+    end
+
+    subgraph SM["GESTOR DE ALMACENAMIENTO"]
+        direction LR
+        S1["Gestor de<br/>autorización e integridad"]
+        S2["Gestor de<br/>transacciones"]
+        S3["Gestor de<br/>archivos"]
+        S4["Gestor de<br/>búfer"]
+    end
+
+    subgraph DSK["ALMACENAMIENTO EN DISCO"]
+        direction LR
+        D1[("Datos")]
+        D2[("Diccionario de<br/>datos (catálogo)")]
+        D3[("Índices")]
+        D4[("Bitácora<br/>(log)")]
+    end
+
+    US1 --> IF1
+    US2 --> IF2
+    US3 --> IF3
+    US4 --> IF4
+    IF1 --> Q2
+    IF2 --> Q2
+    IF3 --> Q2
+    IF4 --> Q1
+    Q1 --> S1
+    Q2 --> Q3
+    Q3 --> S2
+    S1 --> S3
+    S2 --> S3
+    S3 --> S4
+    S4 --> D1
+    S4 --> D3
+    S3 --> D2
+    S2 --> D4
+
+    classDef usr fill:#1F3864,stroke:#1F3864,color:#ffffff
+    classDef intf fill:#FFF2CC,stroke:#BF9000,color:#7F6000
+    classDef nodo fill:#DEEAF6,stroke:#2E75B6,color:#1F3864
+    classDef disk fill:#E2EFDA,stroke:#548235,color:#375623
+    class US1,US2,US3,US4 usr
+    class IF1,IF2,IF3,IF4 intf
+    class Q1,Q2,Q3,S1,S2,S3,S4 nodo
+    class D1,D2,D3,D4 disk
+    style USR fill:#FFFFFF,stroke:#1F3864,stroke-width:2px
+    style INTF fill:#FFFFFF,stroke:#BF9000,stroke-width:2px
+    style QP fill:#FFFFFF,stroke:#1F3864,stroke-width:2px
+    style SM fill:#FFFFFF,stroke:#1F3864,stroke-width:2px
+    style DSK fill:#FFFFFF,stroke:#548235,stroke-width:2px

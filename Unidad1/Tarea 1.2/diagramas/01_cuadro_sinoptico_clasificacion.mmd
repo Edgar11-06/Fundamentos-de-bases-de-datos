@@ -1,0 +1,41 @@
+flowchart LR
+    BD["<b>CLASIFICACIÓN DE LAS<br/>BASES DE DATOS</b>"]
+
+    V["Según la variabilidad<br/>de los datos"]
+    U["Según la ubicación<br/>(distribución)"]
+    M["Según el modelo<br/>de datos"]
+    C["Según su contenido"]
+    N["Según el número<br/>de usuarios"]
+    F["Según su función<br/>o uso"]
+
+    BD --> V
+    BD --> U
+    BD --> M
+    BD --> C
+    BD --> N
+    BD --> F
+
+    V --> V1["<b>Estáticas</b><br/>Solo lectura; datos históricos"]
+    V --> V2["<b>Dinámicas</b><br/>Datos que cambian constantemente"]
+
+    U --> U1["<b>Centralizadas</b><br/>Un solo sitio físico"]
+    U --> U2["<b>Distribuidas</b><br/>Varios sitios conectados por red"]
+    U2 --> U21["Homogéneas<br/>(mismo SGBD)"]
+    U2 --> U22["Heterogéneas<br/>(distintos SGBD)"]
+
+    M --> M1["• Jerárquicas<br/>• De red<br/>• Relacionales<br/>• Orientadas a objetos<br/>• NoSQL (documentos, clave-valor,<br/>   columnas y grafos)"]
+
+    C --> C1["• Bibliográficas<br/>• De texto completo<br/>• Directorios<br/>• Especializadas"]
+
+    N --> N1["<b>Monousuario</b><br/>Un usuario a la vez"]
+    N --> N2["<b>Multiusuario</b><br/>Acceso simultáneo"]
+
+    F --> F1["<b>Operacionales (OLTP)</b><br/>Transacciones diarias"]
+    F --> F2["<b>Analíticas (OLAP)</b><br/>Almacenes de datos"]
+
+    classDef central fill:#1F3864,stroke:#1F3864,color:#ffffff,stroke-width:2px
+    classDef rama fill:#2E75B6,stroke:#1F3864,color:#ffffff
+    classDef hoja fill:#DEEAF6,stroke:#2E75B6,color:#1F3864
+    class BD central
+    class V,U,M,C,N,F rama
+    class V1,V2,U1,U2,U21,U22,M1,C1,N1,N2,F1,F2 hoja
