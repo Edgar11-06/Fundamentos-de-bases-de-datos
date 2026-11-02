@@ -1,0 +1,39 @@
+---
+title: Módulo de usuarios (generalización y atributo compuesto)
+---
+classDiagram
+    direction TB
+    class Usuario {
+        <<abstract>>
+        -idUsuario : String
+        -nombre : Nombre
+        -correo : String
+        -telefonos : String[1..*]
+        -fechaRegistro : Date
+        -estatus : String
+        -/adeudoTotal : Decimal
+        +calcularAdeudo() Decimal
+    }
+    class Nombre {
+        <<dataType>>
+        -nombrePila : String
+        -apellidoPaterno : String
+        -apellidoMaterno : String
+    }
+    class Estudiante {
+        -matricula : String
+        -carrera : String
+        -semestre : Integer
+    }
+    class Docente {
+        -numEmpleado : String
+        -departamento : String
+    }
+    class Externo {
+        -institucionOrigen : String
+        -identificacion : String
+    }
+    Usuario <|-- Estudiante : {disjoint, complete}
+    Usuario <|-- Docente
+    Usuario <|-- Externo
+    Usuario "1" *-- "1" Nombre : se compone de

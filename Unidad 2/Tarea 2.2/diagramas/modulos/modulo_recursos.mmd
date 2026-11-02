@@ -1,0 +1,64 @@
+---
+title: Módulo de recursos (generalización, composición, agregación y clase de asociación)
+---
+classDiagram
+    direction LR
+    class Categoria {
+        -idCategoria : String
+        -nombre : String
+        -descripcion : String
+    }
+    class Recurso {
+        <<abstract>>
+        -idRecurso : String
+        -titulo : String
+        -anioPublicacion : Integer
+        -editorial : String
+        -idioma : String
+        -palabrasClave : String[0..*]
+    }
+    class Libro {
+        -isbn : String
+        -edicion : String
+    }
+    class Revista {
+        -issn : String
+        -volumen : Integer
+        -numero : Integer
+    }
+    class Tesis {
+        -asesor : String
+        -gradoAcademico : String
+    }
+    class Ejemplar {
+        -numEjemplar : Integer
+        -estado : EstadoEjemplar
+        -ubicacion : String
+        -fechaAdquisicion : Date
+        +estaDisponible() Boolean
+    }
+    class EstadoEjemplar {
+        <<enumeration>>
+        DISPONIBLE
+        PRESTADO
+        EN_REPARACION
+        EXTRAVIADO
+    }
+    class Autor {
+        -idAutor : String
+        -nombre : String
+        -nacionalidad : String
+    }
+    class Autoria {
+        <<association class>>
+        -ordenAutoria : Integer
+    }
+    Recurso <|-- Libro : {disjoint, complete}
+    Recurso <|-- Revista
+    Recurso <|-- Tesis
+    Recurso "1" *-- "0..*" Ejemplar : tiene
+    Categoria "1" o-- "0..*" Recurso : agrupa
+    Recurso "1" -- "1..*" Autoria : registra
+    Autor "1" -- "1..*" Autoria : participa en
+    Ejemplar --> EstadoEjemplar
+    note for Autoria "Resuelve la asociación M:N Recurso-Autor"

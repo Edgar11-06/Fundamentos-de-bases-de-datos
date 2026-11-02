@@ -1,0 +1,50 @@
+---
+title: Módulo de préstamos (agregación SOLICITA convertida en clase)
+---
+classDiagram
+    direction LR
+    class Usuario {
+        <<abstract>>
+        -idUsuario : String
+        -/adeudoTotal : Decimal
+        +calcularAdeudo() Decimal
+    }
+    class Ejemplar {
+        -numEjemplar : Integer
+        -estado : EstadoEjemplar
+        +estaDisponible() Boolean
+    }
+    class Bibliotecario {
+        -idEmpleado : String
+        -nombre : String
+        -turno : String
+    }
+    class Prestamo {
+        -folio : String
+        -fechaPrestamo : Date
+        -fechaLimite : Date
+        -fechaDevolucion : Date
+        -/diasRetraso : Integer
+        +calcularDiasRetraso() Integer
+        +registrarDevolucion() void
+    }
+    class Multa {
+        -idMulta : String
+        -tipo : TipoMulta
+        -monto : Decimal
+        -fechaGeneracion : Date
+        -estatusPago : String
+        +registrarPago() void
+    }
+    class TipoMulta {
+        <<enumeration>>
+        RETRASO
+        DANIO
+        EXTRAVIO
+    }
+    Usuario "1" -- "0..*" Prestamo : solicita
+    Ejemplar "1" -- "0..*" Prestamo : se presta en
+    Bibliotecario "1" -- "0..*" Prestamo : autoriza
+    Prestamo "1" *-- "0..*" Multa : genera
+    Multa --> TipoMulta
+    note for Prestamo "Clase obtenida de la agregación SOLICITA (E-RE)"

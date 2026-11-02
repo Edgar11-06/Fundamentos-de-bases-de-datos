@@ -1,0 +1,140 @@
+---
+title: Diagrama de clases UML - Sistema de biblioteca
+---
+classDiagram
+    direction LR
+
+    class Usuario {
+        <<abstract>>
+        -idUsuario : String
+        -nombre : Nombre
+        -correo : String
+        -telefonos : String[1..*]
+        -fechaRegistro : Date
+        -estatus : String
+        -/adeudoTotal : Decimal
+        +calcularAdeudo() Decimal
+    }
+    class Nombre {
+        <<dataType>>
+        -nombrePila : String
+        -apellidoPaterno : String
+        -apellidoMaterno : String
+    }
+    class Estudiante {
+        -matricula : String
+        -carrera : String
+        -semestre : Integer
+    }
+    class Docente {
+        -numEmpleado : String
+        -departamento : String
+    }
+    class Externo {
+        -institucionOrigen : String
+        -identificacion : String
+    }
+
+    class Recurso {
+        <<abstract>>
+        -idRecurso : String
+        -titulo : String
+        -anioPublicacion : Integer
+        -editorial : String
+        -idioma : String
+        -palabrasClave : String[0..*]
+    }
+    class Libro {
+        -isbn : String
+        -edicion : String
+    }
+    class Revista {
+        -issn : String
+        -volumen : Integer
+        -numero : Integer
+    }
+    class Tesis {
+        -asesor : String
+        -gradoAcademico : String
+    }
+    class Ejemplar {
+        -numEjemplar : Integer
+        -estado : EstadoEjemplar
+        -ubicacion : String
+        -fechaAdquisicion : Date
+        +estaDisponible() Boolean
+    }
+    class EstadoEjemplar {
+        <<enumeration>>
+        DISPONIBLE
+        PRESTADO
+        EN_REPARACION
+        EXTRAVIADO
+    }
+    class Autor {
+        -idAutor : String
+        -nombre : String
+        -nacionalidad : String
+    }
+    class Autoria {
+        <<association class>>
+        -ordenAutoria : Integer
+    }
+    class Categoria {
+        -idCategoria : String
+        -nombre : String
+        -descripcion : String
+    }
+
+    class Bibliotecario {
+        -idEmpleado : String
+        -nombre : String
+        -turno : String
+    }
+    class Prestamo {
+        -folio : String
+        -fechaPrestamo : Date
+        -fechaLimite : Date
+        -fechaDevolucion : Date
+        -/diasRetraso : Integer
+        +calcularDiasRetraso() Integer
+        +registrarDevolucion() void
+    }
+    class Multa {
+        -idMulta : String
+        -tipo : TipoMulta
+        -monto : Decimal
+        -fechaGeneracion : Date
+        -estatusPago : String
+        +registrarPago() void
+    }
+    class TipoMulta {
+        <<enumeration>>
+        RETRASO
+        DANIO
+        EXTRAVIO
+    }
+
+    Usuario <|-- Estudiante : {disjoint, complete}
+    Usuario <|-- Docente
+    Usuario <|-- Externo
+    Usuario "1" *-- "1" Nombre : se compone de
+
+    Recurso <|-- Libro : {disjoint, complete}
+    Recurso <|-- Revista
+    Recurso <|-- Tesis
+    Recurso "1" *-- "0..*" Ejemplar : tiene
+    Categoria "1" o-- "0..*" Recurso : agrupa
+    Recurso "1" -- "1..*" Autoria : registra
+    Autor "1" -- "1..*" Autoria : participa en
+
+    Usuario "1" -- "0..*" Prestamo : solicita
+    Ejemplar "1" -- "0..*" Prestamo : se presta en
+    Bibliotecario "1" -- "0..*" Prestamo : autoriza
+    Prestamo "1" *-- "0..*" Multa : genera
+
+    Ejemplar --> EstadoEjemplar
+    Multa --> TipoMulta
+
+    note for Autoria "Resuelve la asociación M:N Recurso-Autor"
+    note for Prestamo "Clase obtenida de la agregación SOLICITA (E-RE)"
