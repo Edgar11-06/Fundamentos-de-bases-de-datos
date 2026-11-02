@@ -175,12 +175,6 @@ Las llaves foráneas por sí solas no garantizan que todo usuario tenga exactame
 
 Estos valores no se almacenan como columnas ordinarias para evitar duplicidad y posibles inconsistencias.
 
-## Cómo visualizar y editar los diagramas
-
-- **Mermaid:** abre [Mermaid Live Editor](https://mermaid.live/) y utiliza el contenido de `diagramas/esquema_relacional.mmd`.
-- **draw.io / diagrams.net:** abre [diagrams.net](https://app.diagrams.net/), selecciona **Archivo → Importar desde → Dispositivo** y elige `diagramas/esquema_relacional.drawio`.
-- **SVG:** abre `diagramas/esquema_relacional.svg` en un navegador o editor vectorial.
-- **SQL:** abre `documentacion/esquema_relacional.sql` en un editor compatible con PostgreSQL.
 
 ## Consideraciones de implementación
 
@@ -200,4 +194,6 @@ La transformación del modelo E-R al esquema relacional permitió organizar la i
 
 ---
 
-**Nota:** Este repositorio contiene el reporte técnico, el esquema SQL y los archivos fuente/exportados del diagrama relacional correspondientes a la Tarea 3.1.
+## 🎥 Video explicativo
+
+▶️ Explicación de los temas en YouTube: [PEGA AQUÍ EL ENLACE DE TU VIDEO](https://www.youtube.com/)
