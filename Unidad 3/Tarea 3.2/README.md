@@ -11,7 +11,7 @@ Implementar en Microsoft SQL Server el esquema relacional de biblioteca de la Ta
 
 ## Archivos
 
-- [Reporte técnico PDF](documentacion/Tarea_3.2_Reporte_Tecnico_SQLServer.pdf)
+- [Reporte técnico PDF](documentacion/Tarea_3.2.pdf)
 - [Script SQL Server schema.sql](documentacion/schema.sql)
 - [Diagrama real de SSMS (PNG)](diagramas/diagrama_fisico_SQLServer_SSMS.png)
 - [Diagrama real de SSMS (SVG con imagen incrustada)](diagramas/diagrama_fisico_SQLServer_SSMS.svg)
