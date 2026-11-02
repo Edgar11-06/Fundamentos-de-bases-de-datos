@@ -13,7 +13,7 @@
 
 1. 📁 **[Tarea 3.1: Transformación de Modelo E-R a Esquema Relacional y Reglas de Integridad](Tarea%203.1/)**
    - 📄 **Entregable PDF:** [Tarea 3.1 - Reporte técnico](Tarea%203.1/documentacion/Tarea_3.1_Reporte_Tecnico.pdf)
-   - 🗄️ **Archivo SQL:** [esquema_relacional_SQLServer.sql](Tarea%203.1/esquema_relacional_SQLServer.sql)
+   - 🗄️ **Archivo SQL:** [esquema_relacional_SQLServer.sql](Tarea%203.1/documentacion/esquema_relacional_SQLServer.sql)
    - 🎥 **Video en YouTube:** Pendiente de agregar el enlace de explicación de la Tarea 3.1.
 
 2. 📁 **[Tarea 3.2: Generación del esquema físico en SGBD y script LDD](Tarea%203.2/)**
