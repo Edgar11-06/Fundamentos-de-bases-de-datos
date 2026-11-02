@@ -34,7 +34,6 @@ Generar el esquema físico en Microsoft SQL Server y documentar su implementaci�
 | [Diagrama en SVG](diagramas/diagrama_fisico_SQLServer_SSMS.svg) | Versión vectorial de la captura |
 | [Mermaid](diagramas/esquema_fisico.mmd) | Representación alternativa editable |
 | [Draw.io](diagramas/esquema_fisico.drawio) | Representación alternativa editable |
-| [Guía de evidencias](evidencias/GUIA_EVIDENCIAS_SQLSERVER.md) | Referencia para documentar la ejecución |
 
 ## 4. Diagrama del esquema físico generado en SQL Server
 
