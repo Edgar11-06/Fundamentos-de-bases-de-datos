@@ -8,6 +8,23 @@
 
 > **Competencia específica:** Aplica el proceso de normalización al diseño de los esquemas de bases de datos para detectar anomalías y garantizar la integridad de la información.
 
+## 📂 Organización
+
+```text
+Tarea 4.2/
+├── README.md
+├── documentacion/
+│   ├── Tarea_4.2_Reporte_Tecnico.pdf
+│   ├── normalized_schema.sql
+│   └── ejemplos_datos_normalizados.sql
+└── diagramas/
+    ├── proceso_normalizacion.mmd
+    ├── proceso_normalizacion.svg
+    ├── proceso_normalizacion.pdf
+    ├── proceso_normalizacion.png
+    └── proceso_normalizacion.dot
+```
+
 ## 📑 Entregables
 
 - 📄 [Reporte técnico de normalización (PDF)](documentacion/Tarea_4.2_Reporte_Tecnico.pdf)
@@ -50,24 +67,6 @@ Para ejecutarlo:
 4. Verifica que se hayan creado 17 tablas.
 5. Ejecuta por separado `documentacion/ejemplos_datos_normalizados.sql` para cargar datos ficticios.
 
-> El script fue revisado de manera estática y está preparado para SQL Server. No se afirma que se haya ejecutado en una instancia real en esta entrega.
-
-## 📂 Organización
-
-```text
-Tarea 4.2/
-├── README.md
-├── documentacion/
-│   ├── Tarea_4.2_Reporte_Tecnico.pdf
-│   ├── normalized_schema.sql
-│   └── ejemplos_datos_normalizados.sql
-└── diagramas/
-    ├── proceso_normalizacion.mmd
-    ├── proceso_normalizacion.svg
-    ├── proceso_normalizacion.pdf
-    ├── proceso_normalizacion.png
-    └── proceso_normalizacion.dot
-```
 
 ## ✅ Anomalías corregidas
 
@@ -80,5 +79,9 @@ Tarea 4.2/
 - Elmasri, R. y Navathe, S. B. (2016). *Fundamentals of Database Systems* (7.ª ed.). Pearson.
 - Silberschatz, A., Korth, H. F. y Sudarshan, S. (2019). *Database System Concepts* (7.ª ed.). McGraw-Hill.
 - [Microsoft Learn — CREATE TABLE (Transact-SQL)](https://learn.microsoft.com/sql/t-sql/statements/create-table-transact-sql)
+
+## 🎥 Video explicativo
+
+▶️ Explicación de los temas en YouTube: [PEGA AQUÍ EL ENLACE DE TU VIDEO](https://www.youtube.com/)
 
 ⬅️ [Volver al README de la Unidad 4](../README.md)
