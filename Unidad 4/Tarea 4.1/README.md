@@ -47,6 +47,6 @@ El archivo `.mmd` es editable en Mermaid. El SVG y el PDF son vectoriales y perm
 
 ## 🎥 Video explicativo
 
-▶️ Explicación de los temas en YouTube: [PEGA AQUÍ EL ENLACE DE TU VIDEO](https://www.youtube.com/)
+▶️ Explicación de los temas en YouTube: [VIDEO YOUTUBE](https://youtu.be/RCSFoyRh1VI)
 
 ⬅️ [Volver a Unidad 4](../README.md)
