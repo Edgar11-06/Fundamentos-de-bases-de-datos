@@ -249,4 +249,4 @@ mmdc -i diagramas/01_cuadro_sinoptico_clasificacion.mmd -o diagramas/01_cuadro_s
 
 ## 🎥 Video explicativo
 
-▶️ Explicación de los temas en YouTube: [PEGA AQUÍ EL ENLACE DE TU VIDEO](https://www.youtube.com/)
+▶️ Explicación de los temas en YouTube: [VIDEO YOUTUBE](https://youtu.be/Ea9HYa_0brs)
