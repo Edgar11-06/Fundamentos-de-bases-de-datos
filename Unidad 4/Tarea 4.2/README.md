@@ -82,6 +82,6 @@ Para ejecutarlo:
 
 ## 🎥 Video explicativo
 
-▶️ Explicación de los temas en YouTube: [PEGA AQUÍ EL ENLACE DE TU VIDEO](https://www.youtube.com/)
+▶️ Explicación de los temas en YouTube: [VIDEO YOUTUBE](https://youtu.be/iyvBETdxGd0)
 
 ⬅️ [Volver al README de la Unidad 4](../README.md)
