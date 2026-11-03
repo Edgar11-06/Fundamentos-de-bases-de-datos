@@ -196,4 +196,4 @@ La transformación del modelo E-R al esquema relacional permitió organizar la i
 
 ## 🎥 Video explicativo
 
-▶️ Explicación de los temas en YouTube: [PEGA AQUÍ EL ENLACE DE TU VIDEO](https://www.youtube.com/)
+▶️ Explicación de los temas en YouTube: [VIDEO YOUTUBE](https://youtu.be/8B3eIsMuO-8)
