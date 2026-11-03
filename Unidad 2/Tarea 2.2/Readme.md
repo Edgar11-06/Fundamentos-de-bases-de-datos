@@ -255,4 +255,4 @@ classDiagram
 
 ## 🎥 Video explicativo
 
-▶️ Explicación de los temas en YouTube: [PEGA AQUÍ EL ENLACE DE TU VIDEO](https://www.youtube.com/)
+▶️ Explicación de los temas en YouTube: [VIDEO YOUTUBE](https://youtu.be/NzkQ94Fd_Gk)
