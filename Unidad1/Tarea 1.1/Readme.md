@@ -98,4 +98,4 @@ mmdc -i diagramas/01_mapa_conceptual_bases_de_datos.mmd -o diagramas/01_mapa_con
 
 ## 🎥 Video explicativo
 
-▶️ Explicación de los temas en YouTube: [PEGA AQUÍ EL ENLACE DE TU VIDEO](https://www.youtube.com/)
+▶️ Explicación de los temas en YouTube: [VIDEO YOUTUBE](https://youtu.be/jaNzTkPIRsw)
