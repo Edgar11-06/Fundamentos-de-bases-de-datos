@@ -20,7 +20,7 @@
    - 📄 **Entregable PDF:** [Tarea 3.2 - Reporte técnico](Tarea%203.2/documentacion/Tarea_3.2.pdf)
    - 🗄️ **Archivo SQL:** [schema.sql](Tarea%203.2/documentacion/schema.sql)
    - 🖼️ **Diagrama físico de SQL Server:** [Ver diagrama](Tarea%203.2/diagramas/diagrama_fisico_SQLServer_SSMS.png)
-   - 🎥 **Video en YouTube:** Pendiente de agregar el enlace de explicación de la Tarea 3.2.
+   - 🎥 **Video en YouTube:** [VIDEO YOUTUBE](https://youtu.be/fPjn_cLWLgw) 
 
 ---
 
