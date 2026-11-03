@@ -154,4 +154,4 @@ La participación es **total** cuando toda ocurrencia de la entidad debe estar r
 
 ## 🎥 Video explicativo
 
-▶️ Explicación de los temas en YouTube: [PEGA AQUÍ EL ENLACE DE TU VIDEO](https://www.youtube.com/)
+▶️ Explicación de los temas en YouTube: [VIDEO YOUTUBE](https://youtu.be/v0oePEeWKZY)
