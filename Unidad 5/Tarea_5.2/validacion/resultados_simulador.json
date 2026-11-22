@@ -1,0 +1,1193 @@
+{
+  "dataset": "Datos ficticios originales de Tarea 4.2",
+  "validation": "SQLite in-memory with same INSERT rows, not SQL Server",
+  "tables": {
+    "categoria": 3,
+    "usuario": 4,
+    "estudiante": 2,
+    "docente": 1,
+    "externo": 1,
+    "telefono_usuario": 4,
+    "recurso": 4,
+    "libro": 2,
+    "revista": 1,
+    "tesis": 1,
+    "palabra_clave_recurso": 5,
+    "autor": 4,
+    "autoria": 5,
+    "ejemplar": 5,
+    "bibliotecario": 2,
+    "prestamo": 3,
+    "multa": 1
+  },
+  "consultas": [
+    {
+      "id": "C01",
+      "title": "Usuarios activos",
+      "level": "Básica",
+      "ask": "Mostrar los identificadores y nombres de usuarios cuyo estatus es ACTIVO.",
+      "ra": "T1 = σ_(estatus = «ACTIVO»)(USUARIO)\nT2 = π_(id_usuario, nombre_pila, apellido_paterno)(T1)",
+      "explain": "Selección σ seguida de proyección π; el resultado omite el estatus.",
+      "stages": [
+        {
+          "label": "T1: usuarios filtrados",
+          "sql": "SELECT id_usuario, nombre_pila, apellido_paterno, estatus FROM usuario WHERE estatus = 'ACTIVO' ORDER BY id_usuario",
+          "cols": [
+            "id_usuario",
+            "nombre_pila",
+            "apellido_paterno",
+            "estatus"
+          ],
+          "rows": [
+            [
+              "USR001",
+              "Ana",
+              "Lopez",
+              "ACTIVO"
+            ],
+            [
+              "USR002",
+              "Carlos",
+              "Ramirez",
+              "ACTIVO"
+            ],
+            [
+              "USR003",
+              "Laura",
+              "Torres",
+              "ACTIVO"
+            ],
+            [
+              "USR004",
+              "Miguel",
+              "Flores",
+              "ACTIVO"
+            ]
+          ],
+          "n": 4
+        },
+        {
+          "label": "T2: atributos requeridos",
+          "sql": "SELECT id_usuario, nombre_pila, apellido_paterno FROM usuario WHERE estatus = 'ACTIVO' ORDER BY id_usuario",
+          "cols": [
+            "id_usuario",
+            "nombre_pila",
+            "apellido_paterno"
+          ],
+          "rows": [
+            [
+              "USR001",
+              "Ana",
+              "Lopez"
+            ],
+            [
+              "USR002",
+              "Carlos",
+              "Ramirez"
+            ],
+            [
+              "USR003",
+              "Laura",
+              "Torres"
+            ],
+            [
+              "USR004",
+              "Miguel",
+              "Flores"
+            ]
+          ],
+          "n": 4
+        }
+      ]
+    },
+    {
+      "id": "C02",
+      "title": "Catálogo de libros",
+      "level": "Básica",
+      "ask": "Identificar los recursos registrados como libros, con título e ISBN.",
+      "ra": "T1 = RECURSO ⋈_(RECURSO.id_recurso = LIBRO.id_recurso) LIBRO\nT2 = π_(id_recurso, titulo, isbn)(T1)",
+      "explain": "Reunión interna entre la clase general de recursos y el subtipo LIBRO.",
+      "stages": [
+        {
+          "label": "T1: recursos con subtipo libro",
+          "sql": "SELECT r.id_recurso, r.titulo, l.isbn, l.edicion FROM recurso r JOIN libro l ON r.id_recurso=l.id_recurso ORDER BY r.id_recurso",
+          "cols": [
+            "id_recurso",
+            "titulo",
+            "isbn",
+            "edicion"
+          ],
+          "rows": [
+            [
+              "REC001",
+              "Fundamentos de Bases de Datos",
+              "9786070000001",
+              "Segunda"
+            ],
+            [
+              "REC004",
+              "Programacion y Algoritmos",
+              "9786070000002",
+              "Primera"
+            ]
+          ],
+          "n": 2
+        },
+        {
+          "label": "T2: datos de libros",
+          "sql": "SELECT r.id_recurso, r.titulo, l.isbn FROM recurso r JOIN libro l ON r.id_recurso=l.id_recurso ORDER BY r.id_recurso",
+          "cols": [
+            "id_recurso",
+            "titulo",
+            "isbn"
+          ],
+          "rows": [
+            [
+              "REC001",
+              "Fundamentos de Bases de Datos",
+              "9786070000001"
+            ],
+            [
+              "REC004",
+              "Programacion y Algoritmos",
+              "9786070000002"
+            ]
+          ],
+          "n": 2
+        }
+      ]
+    },
+    {
+      "id": "C03",
+      "title": "Recursos de Computación",
+      "level": "Intermedia",
+      "ask": "Listar recursos pertenecientes a la categoría Computacion.",
+      "ra": "T1 = σ_(nombre = «Computacion»)(CATEGORIA)\nT2 = T1 ⋈_(T1.id_categoria = RECURSO.id_categoria) RECURSO\nT3 = π_(id_recurso, titulo)(T2)",
+      "explain": "Primero se filtra la categoría; después se aplica join y proyección.",
+      "stages": [
+        {
+          "label": "T1: categoría elegida",
+          "sql": "SELECT id_categoria, nombre FROM categoria WHERE nombre='Computacion'",
+          "cols": [
+            "id_categoria",
+            "nombre"
+          ],
+          "rows": [
+            [
+              "CAT001",
+              "Computacion"
+            ]
+          ],
+          "n": 1
+        },
+        {
+          "label": "T2: unión por clave de categoría",
+          "sql": "SELECT r.id_recurso,r.titulo,c.nombre AS categoria FROM recurso r JOIN categoria c ON r.id_categoria=c.id_categoria WHERE c.nombre='Computacion' ORDER BY r.id_recurso",
+          "cols": [
+            "id_recurso",
+            "titulo",
+            "categoria"
+          ],
+          "rows": [
+            [
+              "REC001",
+              "Fundamentos de Bases de Datos",
+              "Computacion"
+            ],
+            [
+              "REC004",
+              "Programacion y Algoritmos",
+              "Computacion"
+            ]
+          ],
+          "n": 2
+        },
+        {
+          "label": "T3: recurso y título",
+          "sql": "SELECT r.id_recurso,r.titulo FROM recurso r JOIN categoria c ON r.id_categoria=c.id_categoria WHERE c.nombre='Computacion' ORDER BY r.id_recurso",
+          "cols": [
+            "id_recurso",
+            "titulo"
+          ],
+          "rows": [
+            [
+              "REC001",
+              "Fundamentos de Bases de Datos"
+            ],
+            [
+              "REC004",
+              "Programacion y Algoritmos"
+            ]
+          ],
+          "n": 2
+        }
+      ]
+    },
+    {
+      "id": "C04",
+      "title": "Usuarios sin préstamos registrados",
+      "level": "Intermedia",
+      "ask": "Encontrar usuarios cuyo identificador no aparece en la tabla PRESTAMO.",
+      "ra": "T1 = π_id_usuario(USUARIO)\nT2 = π_id_usuario(PRESTAMO)\nT3 = T1 − T2\nT4 = π_(id_usuario, nombre_pila)(USUARIO ⋈_(USUARIO.id_usuario = T3.id_usuario) T3)",
+      "explain": "La resta se efectúa sobre relaciones de un único atributo compatible.",
+      "stages": [
+        {
+          "label": "T1: universo usuarios",
+          "sql": "SELECT DISTINCT id_usuario FROM usuario ORDER BY id_usuario",
+          "cols": [
+            "id_usuario"
+          ],
+          "rows": [
+            [
+              "USR001"
+            ],
+            [
+              "USR002"
+            ],
+            [
+              "USR003"
+            ],
+            [
+              "USR004"
+            ]
+          ],
+          "n": 4
+        },
+        {
+          "label": "T2: usuarios que prestaron",
+          "sql": "SELECT DISTINCT id_usuario FROM prestamo ORDER BY id_usuario",
+          "cols": [
+            "id_usuario"
+          ],
+          "rows": [
+            [
+              "USR001"
+            ],
+            [
+              "USR002"
+            ],
+            [
+              "USR004"
+            ]
+          ],
+          "n": 3
+        },
+        {
+          "label": "T3: diferencia de conjuntos",
+          "sql": "SELECT id_usuario FROM usuario EXCEPT SELECT id_usuario FROM prestamo",
+          "cols": [
+            "id_usuario"
+          ],
+          "rows": [
+            [
+              "USR003"
+            ]
+          ],
+          "n": 1
+        },
+        {
+          "label": "T4: nombres de usuarios sin préstamo",
+          "sql": "SELECT u.id_usuario,u.nombre_pila FROM usuario u WHERE NOT EXISTS (SELECT 1 FROM prestamo p WHERE p.id_usuario=u.id_usuario) ORDER BY u.id_usuario",
+          "cols": [
+            "id_usuario",
+            "nombre_pila"
+          ],
+          "rows": [
+            [
+              "USR003",
+              "Laura"
+            ]
+          ],
+          "n": 1
+        }
+      ]
+    },
+    {
+      "id": "C05",
+      "title": "Autores de un recurso",
+      "level": "Intermedia",
+      "ask": "Indicar los autores y orden de autoría del recurso REC001.",
+      "ra": "T1 = σ_(id_recurso = «REC001»)(AUTORIA)\nT2 = T1 ⋈_(T1.id_autor = AUTOR.id_autor) AUTOR\nT3 = π_(nombre, orden_autoria)(T2)",
+      "explain": "AUTORIA es la relación intermedia N:M entre RECURSO y AUTOR.",
+      "stages": [
+        {
+          "label": "T1: autorías de REC001",
+          "sql": "SELECT id_recurso,id_autor,orden_autoria FROM autoria WHERE id_recurso='REC001' ORDER BY orden_autoria",
+          "cols": [
+            "id_recurso",
+            "id_autor",
+            "orden_autoria"
+          ],
+          "rows": [
+            [
+              "REC001",
+              "AUT001",
+              "1"
+            ],
+            [
+              "REC001",
+              "AUT002",
+              "2"
+            ]
+          ],
+          "n": 2
+        },
+        {
+          "label": "T2: autorías con nombre",
+          "sql": "SELECT a.id_autor,t.nombre,a.orden_autoria FROM autoria a JOIN autor t ON a.id_autor=t.id_autor WHERE a.id_recurso='REC001' ORDER BY a.orden_autoria",
+          "cols": [
+            "id_autor",
+            "nombre",
+            "orden_autoria"
+          ],
+          "rows": [
+            [
+              "AUT001",
+              "Roberto Mendoza",
+              "1"
+            ],
+            [
+              "AUT002",
+              "Sofia Herrera",
+              "2"
+            ]
+          ],
+          "n": 2
+        },
+        {
+          "label": "T3: nombre y orden",
+          "sql": "SELECT t.nombre,a.orden_autoria FROM autoria a JOIN autor t ON a.id_autor=t.id_autor WHERE a.id_recurso='REC001' ORDER BY a.orden_autoria",
+          "cols": [
+            "nombre",
+            "orden_autoria"
+          ],
+          "rows": [
+            [
+              "Roberto Mendoza",
+              "1"
+            ],
+            [
+              "Sofia Herrera",
+              "2"
+            ]
+          ],
+          "n": 2
+        }
+      ]
+    },
+    {
+      "id": "C06",
+      "title": "Recursos escritos por todos los autores requeridos",
+      "level": "Avanzada",
+      "ask": "Encontrar recursos en cuya lista de autoría figuran tanto AUT001 como AUT002.",
+      "ra": "S = σ_(id_autor = «AUT001» ∨ id_autor = «AUT002»)(AUTOR)\nY = π_id_autor(S)\nX = π_(id_recurso, id_autor)(AUTORIA)\nT = X ÷ Y\nResultado = π_(id_recurso, titulo)(T ⋈_(T.id_recurso = RECURSO.id_recurso) RECURSO)",
+      "explain": "División ÷ expresa el cuantificador «para todos»; el SQL final usa doble NOT EXISTS.",
+      "stages": [
+        {
+          "label": "S: autores requeridos",
+          "sql": "SELECT id_autor FROM autor WHERE id_autor IN ('AUT001','AUT002') ORDER BY id_autor",
+          "cols": [
+            "id_autor"
+          ],
+          "rows": [
+            [
+              "AUT001"
+            ],
+            [
+              "AUT002"
+            ]
+          ],
+          "n": 2
+        },
+        {
+          "label": "X: pares de autoría",
+          "sql": "SELECT id_recurso,id_autor FROM autoria ORDER BY id_recurso,id_autor",
+          "cols": [
+            "id_recurso",
+            "id_autor"
+          ],
+          "rows": [
+            [
+              "REC001",
+              "AUT001"
+            ],
+            [
+              "REC001",
+              "AUT002"
+            ],
+            [
+              "REC002",
+              "AUT003"
+            ],
+            [
+              "REC003",
+              "AUT002"
+            ],
+            [
+              "REC004",
+              "AUT004"
+            ]
+          ],
+          "n": 5
+        },
+        {
+          "label": "T: división universal",
+          "sql": "SELECT a.id_recurso FROM autoria a GROUP BY a.id_recurso HAVING COUNT(DISTINCT CASE WHEN a.id_autor IN ('AUT001','AUT002') THEN a.id_autor END) = 2 ORDER BY a.id_recurso",
+          "cols": [
+            "id_recurso"
+          ],
+          "rows": [
+            [
+              "REC001"
+            ]
+          ],
+          "n": 1
+        },
+        {
+          "label": "Resultado: recursos y títulos",
+          "sql": "SELECT r.id_recurso,r.titulo FROM recurso r WHERE NOT EXISTS (SELECT 1 FROM autor y WHERE y.id_autor IN ('AUT001','AUT002') AND NOT EXISTS (SELECT 1 FROM autoria a WHERE a.id_recurso=r.id_recurso AND a.id_autor=y.id_autor)) ORDER BY r.id_recurso",
+          "cols": [
+            "id_recurso",
+            "titulo"
+          ],
+          "rows": [
+            [
+              "REC001",
+              "Fundamentos de Bases de Datos"
+            ]
+          ],
+          "n": 1
+        }
+      ]
+    },
+    {
+      "id": "C07",
+      "title": "Préstamos, usuarios y títulos",
+      "level": "Intermedia",
+      "ask": "Mostrar folio, nombre del usuario y título del material prestado.",
+      "ra": "T1 = PRESTAMO ⋈_(PRESTAMO.id_usuario = USUARIO.id_usuario) USUARIO\nT2 = T1 ⋈_(T1.id_recurso = RECURSO.id_recurso) RECURSO\nT3 = π_(folio, nombre_pila, titulo)(T2)",
+      "explain": "Tres relaciones mediante dos joins, con columnas explícitas para evitar confusiones de nombres.",
+      "stages": [
+        {
+          "label": "T1: préstamos con usuario",
+          "sql": "SELECT p.folio,u.nombre_pila FROM prestamo p JOIN usuario u ON p.id_usuario=u.id_usuario ORDER BY p.folio",
+          "cols": [
+            "folio",
+            "nombre_pila"
+          ],
+          "rows": [
+            [
+              "PRE001",
+              "Ana"
+            ],
+            [
+              "PRE002",
+              "Carlos"
+            ],
+            [
+              "PRE003",
+              "Miguel"
+            ]
+          ],
+          "n": 3
+        },
+        {
+          "label": "T2: agregar recurso",
+          "sql": "SELECT p.folio,u.nombre_pila,r.titulo FROM prestamo p JOIN usuario u ON p.id_usuario=u.id_usuario JOIN recurso r ON r.id_recurso=p.id_recurso ORDER BY p.folio",
+          "cols": [
+            "folio",
+            "nombre_pila",
+            "titulo"
+          ],
+          "rows": [
+            [
+              "PRE001",
+              "Ana",
+              "Fundamentos de Bases de Datos"
+            ],
+            [
+              "PRE002",
+              "Carlos",
+              "Programacion y Algoritmos"
+            ],
+            [
+              "PRE003",
+              "Miguel",
+              "Revista de Tecnologia Aplicada"
+            ]
+          ],
+          "n": 3
+        },
+        {
+          "label": "T3: información final",
+          "sql": "SELECT p.folio,u.nombre_pila,r.titulo FROM prestamo p JOIN usuario u ON p.id_usuario=u.id_usuario JOIN recurso r ON r.id_recurso=p.id_recurso ORDER BY p.folio",
+          "cols": [
+            "folio",
+            "nombre_pila",
+            "titulo"
+          ],
+          "rows": [
+            [
+              "PRE001",
+              "Ana",
+              "Fundamentos de Bases de Datos"
+            ],
+            [
+              "PRE002",
+              "Carlos",
+              "Programacion y Algoritmos"
+            ],
+            [
+              "PRE003",
+              "Miguel",
+              "Revista de Tecnologia Aplicada"
+            ]
+          ],
+          "n": 3
+        }
+      ]
+    },
+    {
+      "id": "C08",
+      "title": "Todos los usuarios con préstamos opcionales",
+      "level": "Avanzada",
+      "ask": "Mostrar todos los usuarios y sus folios, incluso los que nunca han solicitado un préstamo.",
+      "ra": "T1 = USUARIO ⟕_(USUARIO.id_usuario = PRESTAMO.id_usuario) PRESTAMO\nT2 = π_(id_usuario, nombre_pila, folio)(T1)",
+      "explain": "El LEFT OUTER JOIN conserva USR003 con folio NULL.",
+      "stages": [
+        {
+          "label": "T1: reunión externa izquierda",
+          "sql": "SELECT u.id_usuario,u.nombre_pila,p.folio,p.fecha_prestamo FROM usuario u LEFT JOIN prestamo p ON p.id_usuario=u.id_usuario ORDER BY u.id_usuario,p.folio",
+          "cols": [
+            "id_usuario",
+            "nombre_pila",
+            "folio",
+            "fecha_prestamo"
+          ],
+          "rows": [
+            [
+              "USR001",
+              "Ana",
+              "PRE001",
+              "2026-09-01"
+            ],
+            [
+              "USR002",
+              "Carlos",
+              "PRE002",
+              "2026-09-03"
+            ],
+            [
+              "USR003",
+              "Laura",
+              null,
+              null
+            ],
+            [
+              "USR004",
+              "Miguel",
+              "PRE003",
+              "2026-09-10"
+            ]
+          ],
+          "n": 4
+        },
+        {
+          "label": "T2: campos finales",
+          "sql": "SELECT u.id_usuario,u.nombre_pila,p.folio FROM usuario u LEFT JOIN prestamo p ON p.id_usuario=u.id_usuario ORDER BY u.id_usuario,p.folio",
+          "cols": [
+            "id_usuario",
+            "nombre_pila",
+            "folio"
+          ],
+          "rows": [
+            [
+              "USR001",
+              "Ana",
+              "PRE001"
+            ],
+            [
+              "USR002",
+              "Carlos",
+              "PRE002"
+            ],
+            [
+              "USR003",
+              "Laura",
+              null
+            ],
+            [
+              "USR004",
+              "Miguel",
+              "PRE003"
+            ]
+          ],
+          "n": 4
+        }
+      ]
+    },
+    {
+      "id": "C09",
+      "title": "Montos de multa por usuario",
+      "level": "Avanzada",
+      "ask": "Calcular para cada usuario el total de multas registradas, incluyendo usuarios sin multas.",
+      "ra": "T1 = USUARIO ⟕_(USUARIO.id_usuario = PRESTAMO.id_usuario) PRESTAMO\nT2 = T1 ⟕_(T1.folio = MULTA.folio) MULTA\nT3 = γ_(id_usuario, nombre_pila; SUM(monto)→total_multas)(T2)\nT4 = π_(id_usuario, nombre_pila, COALESCE(total_multas,0)→total)(T3)",
+      "explain": "Agregación extendida γ y dos reuniones externas. Se suman todas las multas, no solo las pendientes.",
+      "stages": [
+        {
+          "label": "T1: usuarios y folios",
+          "sql": "SELECT u.id_usuario,u.nombre_pila,p.folio FROM usuario u LEFT JOIN prestamo p ON p.id_usuario=u.id_usuario ORDER BY u.id_usuario",
+          "cols": [
+            "id_usuario",
+            "nombre_pila",
+            "folio"
+          ],
+          "rows": [
+            [
+              "USR001",
+              "Ana",
+              "PRE001"
+            ],
+            [
+              "USR002",
+              "Carlos",
+              "PRE002"
+            ],
+            [
+              "USR003",
+              "Laura",
+              null
+            ],
+            [
+              "USR004",
+              "Miguel",
+              "PRE003"
+            ]
+          ],
+          "n": 4
+        },
+        {
+          "label": "T2: multas asociadas",
+          "sql": "SELECT u.id_usuario,u.nombre_pila,p.folio,m.monto FROM usuario u LEFT JOIN prestamo p ON p.id_usuario=u.id_usuario LEFT JOIN multa m ON m.folio=p.folio ORDER BY u.id_usuario",
+          "cols": [
+            "id_usuario",
+            "nombre_pila",
+            "folio",
+            "monto"
+          ],
+          "rows": [
+            [
+              "USR001",
+              "Ana",
+              "PRE001",
+              null
+            ],
+            [
+              "USR002",
+              "Carlos",
+              "PRE002",
+              "45.00"
+            ],
+            [
+              "USR003",
+              "Laura",
+              null,
+              null
+            ],
+            [
+              "USR004",
+              "Miguel",
+              "PRE003",
+              null
+            ]
+          ],
+          "n": 4
+        },
+        {
+          "label": "T3: sumas agrupadas",
+          "sql": "SELECT u.id_usuario,u.nombre_pila,SUM(m.monto) AS total_multas FROM usuario u LEFT JOIN prestamo p ON p.id_usuario=u.id_usuario LEFT JOIN multa m ON m.folio=p.folio GROUP BY u.id_usuario,u.nombre_pila ORDER BY u.id_usuario",
+          "cols": [
+            "id_usuario",
+            "nombre_pila",
+            "total_multas"
+          ],
+          "rows": [
+            [
+              "USR001",
+              "Ana",
+              null
+            ],
+            [
+              "USR002",
+              "Carlos",
+              45.0
+            ],
+            [
+              "USR003",
+              "Laura",
+              null
+            ],
+            [
+              "USR004",
+              "Miguel",
+              null
+            ]
+          ],
+          "n": 4
+        },
+        {
+          "label": "T4: nulos convertidos en cero",
+          "sql": "SELECT u.id_usuario,u.nombre_pila,COALESCE(SUM(m.monto),0) AS total FROM usuario u LEFT JOIN prestamo p ON p.id_usuario=u.id_usuario LEFT JOIN multa m ON m.folio=p.folio GROUP BY u.id_usuario,u.nombre_pila ORDER BY u.id_usuario",
+          "cols": [
+            "id_usuario",
+            "nombre_pila",
+            "total"
+          ],
+          "rows": [
+            [
+              "USR001",
+              "Ana",
+              0
+            ],
+            [
+              "USR002",
+              "Carlos",
+              45.0
+            ],
+            [
+              "USR003",
+              "Laura",
+              0
+            ],
+            [
+              "USR004",
+              "Miguel",
+              0
+            ]
+          ],
+          "n": 4
+        }
+      ]
+    },
+    {
+      "id": "C10",
+      "title": "Ejemplares disponibles y sus categorías",
+      "level": "Avanzada",
+      "ask": "Listar ejemplares con estado DISPONIBLE, título y categoría.",
+      "ra": "T1 = σ_(estado = «DISPONIBLE»)(EJEMPLAR)\nT2 = T1 ⋈_(T1.id_recurso = RECURSO.id_recurso) RECURSO\nT3 = T2 ⋈_(T2.id_categoria = CATEGORIA.id_categoria) CATEGORIA\nT4 = π_(id_recurso, num_ejemplar, titulo, nombre_categoria)(T3)",
+      "explain": "Aplica selección antes de dos joins; solo ejemplares con estado DISPONIBLE.",
+      "stages": [
+        {
+          "label": "T1: copias disponibles",
+          "sql": "SELECT id_recurso,num_ejemplar,estado FROM ejemplar WHERE estado='DISPONIBLE' ORDER BY id_recurso,num_ejemplar",
+          "cols": [
+            "id_recurso",
+            "num_ejemplar",
+            "estado"
+          ],
+          "rows": [
+            [
+              "REC001",
+              "1",
+              "DISPONIBLE"
+            ],
+            [
+              "REC002",
+              "1",
+              "DISPONIBLE"
+            ],
+            [
+              "REC003",
+              "1",
+              "DISPONIBLE"
+            ]
+          ],
+          "n": 3
+        },
+        {
+          "label": "T2: nombres de recursos",
+          "sql": "SELECT e.id_recurso,e.num_ejemplar,r.titulo FROM ejemplar e JOIN recurso r ON e.id_recurso=r.id_recurso WHERE e.estado='DISPONIBLE' ORDER BY e.id_recurso,e.num_ejemplar",
+          "cols": [
+            "id_recurso",
+            "num_ejemplar",
+            "titulo"
+          ],
+          "rows": [
+            [
+              "REC001",
+              "1",
+              "Fundamentos de Bases de Datos"
+            ],
+            [
+              "REC002",
+              "1",
+              "Revista de Tecnologia Aplicada"
+            ],
+            [
+              "REC003",
+              "1",
+              "Modelo de Gestion Bibliotecaria"
+            ]
+          ],
+          "n": 3
+        },
+        {
+          "label": "T3 y T4: añadir categoría y proyectar",
+          "sql": "SELECT e.id_recurso,e.num_ejemplar,r.titulo,c.nombre AS categoria FROM ejemplar e JOIN recurso r ON e.id_recurso=r.id_recurso JOIN categoria c ON c.id_categoria=r.id_categoria WHERE e.estado='DISPONIBLE' ORDER BY e.id_recurso,e.num_ejemplar",
+          "cols": [
+            "id_recurso",
+            "num_ejemplar",
+            "titulo",
+            "categoria"
+          ],
+          "rows": [
+            [
+              "REC001",
+              "1",
+              "Fundamentos de Bases de Datos",
+              "Computacion"
+            ],
+            [
+              "REC002",
+              "1",
+              "Revista de Tecnologia Aplicada",
+              "Ciencias"
+            ],
+            [
+              "REC003",
+              "1",
+              "Modelo de Gestion Bibliotecaria",
+              "Investigacion"
+            ]
+          ],
+          "n": 3
+        }
+      ]
+    },
+    {
+      "id": "C11",
+      "title": "Usuarios de tipo estudiante o docente",
+      "level": "Intermedia",
+      "ask": "Obtener identificadores de usuarios en cualquiera de los dos subtipos ESTUDIANTE o DOCENTE.",
+      "ra": "T1 = π_id_usuario(ESTUDIANTE)\nT2 = π_id_usuario(DOCENTE)\nT3 = T1 ∪ T2",
+      "explain": "Unión ∪ entre proyecciones con la misma estructura; la especialización es disjunta.",
+      "stages": [
+        {
+          "label": "T1: estudiantes",
+          "sql": "SELECT id_usuario FROM estudiante ORDER BY id_usuario",
+          "cols": [
+            "id_usuario"
+          ],
+          "rows": [
+            [
+              "USR001"
+            ],
+            [
+              "USR004"
+            ]
+          ],
+          "n": 2
+        },
+        {
+          "label": "T2: docentes",
+          "sql": "SELECT id_usuario FROM docente ORDER BY id_usuario",
+          "cols": [
+            "id_usuario"
+          ],
+          "rows": [
+            [
+              "USR002"
+            ]
+          ],
+          "n": 1
+        },
+        {
+          "label": "T3: unión sin duplicados",
+          "sql": "SELECT id_usuario FROM estudiante UNION SELECT id_usuario FROM docente ORDER BY id_usuario",
+          "cols": [
+            "id_usuario"
+          ],
+          "rows": [
+            [
+              "USR001"
+            ],
+            [
+              "USR002"
+            ],
+            [
+              "USR004"
+            ]
+          ],
+          "n": 3
+        }
+      ]
+    },
+    {
+      "id": "C12",
+      "title": "Préstamos devueltos fuera de plazo",
+      "level": "Intermedia",
+      "ask": "Identificar préstamos cuya devolución registrada ocurrió después de la fecha límite.",
+      "ra": "T1 = σ_(fecha_devolucion definida ∧ fecha_devolucion > fecha_limite)(PRESTAMO)\nT2 = π_(folio, fecha_limite, fecha_devolucion)(T1)",
+      "explain": "En semántica SQL se verifica IS NOT NULL; comparación temporal con DATE.",
+      "stages": [
+        {
+          "label": "T1: préstamos devueltos tarde",
+          "sql": "SELECT folio,fecha_limite,fecha_devolucion FROM prestamo WHERE fecha_devolucion IS NOT NULL AND fecha_devolucion > fecha_limite ORDER BY folio",
+          "cols": [
+            "folio",
+            "fecha_limite",
+            "fecha_devolucion"
+          ],
+          "rows": [
+            [
+              "PRE002",
+              "2026-09-17",
+              "2026-09-20"
+            ]
+          ],
+          "n": 1
+        },
+        {
+          "label": "T2: atributos del resultado",
+          "sql": "SELECT folio,fecha_limite,fecha_devolucion FROM prestamo WHERE fecha_devolucion IS NOT NULL AND fecha_devolucion > fecha_limite ORDER BY folio",
+          "cols": [
+            "folio",
+            "fecha_limite",
+            "fecha_devolucion"
+          ],
+          "rows": [
+            [
+              "PRE002",
+              "2026-09-17",
+              "2026-09-20"
+            ]
+          ],
+          "n": 1
+        }
+      ]
+    },
+    {
+      "id": "C13",
+      "title": "Recursos nunca prestados",
+      "level": "Intermedia",
+      "ask": "Identificar recursos cuyo identificador no está en ningún préstamo histórico.",
+      "ra": "T1 = π_id_recurso(RECURSO)\nT2 = π_id_recurso(PRESTAMO)\nT3 = T1 − T2\nT4 = π_(id_recurso, titulo)(T3 ⋈_(T3.id_recurso = RECURSO.id_recurso) RECURSO)",
+      "explain": "Se compara id_recurso, no el ejemplar: responde recursos nunca prestados.",
+      "stages": [
+        {
+          "label": "T1: todos los recursos",
+          "sql": "SELECT id_recurso FROM recurso ORDER BY id_recurso",
+          "cols": [
+            "id_recurso"
+          ],
+          "rows": [
+            [
+              "REC001"
+            ],
+            [
+              "REC002"
+            ],
+            [
+              "REC003"
+            ],
+            [
+              "REC004"
+            ]
+          ],
+          "n": 4
+        },
+        {
+          "label": "T2: recursos prestados",
+          "sql": "SELECT DISTINCT id_recurso FROM prestamo ORDER BY id_recurso",
+          "cols": [
+            "id_recurso"
+          ],
+          "rows": [
+            [
+              "REC001"
+            ],
+            [
+              "REC002"
+            ],
+            [
+              "REC004"
+            ]
+          ],
+          "n": 3
+        },
+        {
+          "label": "T3: diferencia",
+          "sql": "SELECT id_recurso FROM recurso EXCEPT SELECT id_recurso FROM prestamo",
+          "cols": [
+            "id_recurso"
+          ],
+          "rows": [
+            [
+              "REC003"
+            ]
+          ],
+          "n": 1
+        },
+        {
+          "label": "T4: recursos con título",
+          "sql": "SELECT r.id_recurso,r.titulo FROM recurso r WHERE NOT EXISTS (SELECT 1 FROM prestamo p WHERE p.id_recurso=r.id_recurso) ORDER BY r.id_recurso",
+          "cols": [
+            "id_recurso",
+            "titulo"
+          ],
+          "rows": [
+            [
+              "REC003",
+              "Modelo de Gestion Bibliotecaria"
+            ]
+          ],
+          "n": 1
+        }
+      ]
+    },
+    {
+      "id": "C14",
+      "title": "Recursos prestados que cuentan con ejemplares disponibles",
+      "level": "Avanzada",
+      "ask": "Encontrar recursos que tienen por lo menos un préstamo histórico y al menos un ejemplar actualmente marcado DISPONIBLE.",
+      "ra": "T1 = π_id_recurso(PRESTAMO)\nT2 = π_id_recurso(σ_(estado = «DISPONIBLE»)(EJEMPLAR))\nT3 = T1 ∩ T2",
+      "explain": "Intersección ∩: historial de préstamos y estado actual son conceptos independientes.",
+      "stages": [
+        {
+          "label": "T1: recursos prestados",
+          "sql": "SELECT DISTINCT id_recurso FROM prestamo ORDER BY id_recurso",
+          "cols": [
+            "id_recurso"
+          ],
+          "rows": [
+            [
+              "REC001"
+            ],
+            [
+              "REC002"
+            ],
+            [
+              "REC004"
+            ]
+          ],
+          "n": 3
+        },
+        {
+          "label": "T2: recursos con copias disponibles",
+          "sql": "SELECT DISTINCT id_recurso FROM ejemplar WHERE estado='DISPONIBLE' ORDER BY id_recurso",
+          "cols": [
+            "id_recurso"
+          ],
+          "rows": [
+            [
+              "REC001"
+            ],
+            [
+              "REC002"
+            ],
+            [
+              "REC003"
+            ]
+          ],
+          "n": 3
+        },
+        {
+          "label": "T3: intersección",
+          "sql": "SELECT id_recurso FROM prestamo INTERSECT SELECT id_recurso FROM ejemplar WHERE estado='DISPONIBLE' ORDER BY id_recurso",
+          "cols": [
+            "id_recurso"
+          ],
+          "rows": [
+            [
+              "REC001"
+            ],
+            [
+              "REC002"
+            ]
+          ],
+          "n": 2
+        }
+      ]
+    },
+    {
+      "id": "C15",
+      "title": "Combinaciones hipotéticas de categoría y bibliotecario",
+      "level": "Básica",
+      "ask": "Generar todas las parejas posibles de categoría y bibliotecario para ilustrar el producto cartesiano; no representan asignaciones reales.",
+      "ra": "T1 = CATEGORIA × BIBLIOTECARIO\nT2 = π_(CATEGORIA.nombre→nombre_categoria, BIBLIOTECARIO.nombre→nombre_bibliotecario)(T1)",
+      "explain": "Producto cartesiano ×: 3 categorías × 2 bibliotecarios = 6 parejas hipotéticas.",
+      "stages": [
+        {
+          "label": "T1: combinación de identificadores",
+          "sql": "SELECT c.id_categoria,b.id_empleado FROM categoria c CROSS JOIN bibliotecario b ORDER BY c.id_categoria,b.id_empleado",
+          "cols": [
+            "id_categoria",
+            "id_empleado"
+          ],
+          "rows": [
+            [
+              "CAT001",
+              "EMP001"
+            ],
+            [
+              "CAT001",
+              "EMP002"
+            ],
+            [
+              "CAT002",
+              "EMP001"
+            ],
+            [
+              "CAT002",
+              "EMP002"
+            ],
+            [
+              "CAT003",
+              "EMP001"
+            ],
+            [
+              "CAT003",
+              "EMP002"
+            ]
+          ],
+          "n": 6
+        },
+        {
+          "label": "T2: descripción de pares",
+          "sql": "SELECT c.nombre AS categoria,b.nombre AS bibliotecario FROM categoria c CROSS JOIN bibliotecario b ORDER BY c.id_categoria,b.id_empleado",
+          "cols": [
+            "categoria",
+            "bibliotecario"
+          ],
+          "rows": [
+            [
+              "Computacion",
+              "Mariana Salazar"
+            ],
+            [
+              "Computacion",
+              "Jorge Castillo"
+            ],
+            [
+              "Ciencias",
+              "Mariana Salazar"
+            ],
+            [
+              "Ciencias",
+              "Jorge Castillo"
+            ],
+            [
+              "Investigacion",
+              "Mariana Salazar"
+            ],
+            [
+              "Investigacion",
+              "Jorge Castillo"
+            ]
+          ],
+          "n": 6
+        }
+      ]
+    }
+  ]
+}
