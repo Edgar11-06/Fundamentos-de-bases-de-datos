@@ -1,0 +1,31 @@
+digraph algebra {
+graph [rankdir=TB,bgcolor="white",pad=".4",nodesep=".25",ranksep=".55",splines=polyline,fontname="DejaVu Sans",fontsize=12];
+node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=10,margin=".19,.13",color="#8ca6bf",fillcolor="#edf5fc"];
+edge [color="#6683a1",penwidth=1.3,arrowsize=.55];
+A [label="ÁLGEBRA RELACIONAL\nOperaciones cerradas: relaciones → relaciones",fontcolor=white,fillcolor="#17365d",fontsize=16];
+subgraph cluster_unarios {label="OPERADORES UNARIOS";labelloc=t;style="rounded,filled";color="#bbd8eb";fillcolor="#f1f8fc";
+B1 [label="SELECCIÓN · σ\nFiltra filas por condición"];
+B2 [label="PROYECCIÓN · π\nElige columnas; elimina duplicados"];
+B1 -> B2 [style=invis];
+}
+subgraph cluster_binarios {label="OPERADORES BINARIOS";labelloc=t;style="rounded,filled";color="#b9d7c3";fillcolor="#f3faf5";
+C1 [label="PRODUCTO CARTESIANO · ×\nTodas las combinaciones"];
+C2 [label="UNIÓN · ∪\nRegistros en R o S"];
+C3 [label="INTERSECCIÓN · ∩\nRegistros en R y S"];
+C4 [label="DIFERENCIA · −\nRegistros solo en R"];
+C5 [label="DIVISIÓN · ÷\nConsultas de «para todos»"];
+C6 [label="REUNIÓN / JOIN · ⋈\nRelaciona tuplas"];
+C1 -> C2 -> C3 -> C4 -> C5 -> C6 [style=invis];
+}
+subgraph cluster_ext {label="ÁLGEBRA RELACIONAL EXTENDIDA";labelloc=t;style="rounded,filled";color="#ead09d";fillcolor="#fffaf0";
+D1 [label="PROYECCIÓN GENERALIZADA\nπ con expresiones calculadas"];
+D2 [label="AGRUPACIÓN Y AGREGACIÓN\nγ o G: COUNT, SUM, AVG, MIN, MAX"];
+D3 [label="REUNIONES EXTERNAS\nLEFT / RIGHT / FULL"];
+D1 -> D2 -> D3 [style=invis];
+}
+A -> {B1 C1 D1};
+{rank=same;B1;C1;D1}
+E [label="∪, ∩, − requieren compatibilidad\n(misma aridad y dominios correspondientes)",fillcolor="#fff0d7"];
+F [label="JOIN externo conserva filas sin pareja\ncon NULL en atributos faltantes",fillcolor="#fff0d7"];
+C2 -> E [style=dashed];C3 -> E [style=dashed];C4 -> E [style=dashed];D3 -> F [style=dashed];
+}

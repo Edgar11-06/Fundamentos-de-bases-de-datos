@@ -1,0 +1,20 @@
+flowchart TB
+    A["ÁLGEBRA RELACIONAL<br/>Operaciones sobre relaciones; resultado = relación"]
+    A --> B["OPERADORES UNARIOS"]
+    A --> C["OPERADORES BINARIOS"]
+    A --> D["ÁLGEBRA EXTENDIDA"]
+    B --> B1["SELECCIÓN σ condición(R)<br/>Filtra filas"]
+    B --> B2["PROYECCIÓN π atributos(R)<br/>Escoge columnas; elimina duplicados"]
+    C --> C1["PRODUCTO ×<br/>Combina todas las parejas de tuplas"]
+    C --> C2["UNIÓN ∪<br/>Tuplas de R o S"]
+    C --> C3["INTERSECCIÓN ∩<br/>Tuplas comunes"]
+    C --> C4["DIFERENCIA −<br/>Tuplas de R que no están en S"]
+    C --> C5["DIVISIÓN ÷<br/>Consultas de 'para todos'"]
+    C --> C6["REUNIÓN ⋈<br/>Combina tuplas relacionadas"]
+    D --> D1["PROYECCIÓN GENERALIZADA<br/>π expresiones(R): cálculos y renombrado"]
+    D --> D2["AGREGACIÓN γ / G<br/>COUNT, SUM, AVG, MIN, MAX; GROUP BY"]
+    D --> D3["REUNIÓN EXTERNA<br/>LEFT ⟕, RIGHT ⟖, FULL ⟗"]
+    C2 -.-> E["∪, ∩ y − necesitan<br/>relaciones compatibles para unión"]
+    C3 -.-> E
+    C4 -.-> E
+    D3 -.-> F["Conserva filas sin correspondencia<br/>completando con NULL"]
